@@ -1,5 +1,6 @@
 import CharakterAndAttributes.GameCharacter;
 import Quest.Prolog;
+import Support.EzLog;
 import World.WorldMap;
 
 public class Main {
@@ -18,5 +19,13 @@ public class Main {
 		
 		quest = new Quest.Prolog(character);
 		quest.startNewStory();
+		String input;
+		while(true) {
+			input=EzLog.in("What Do You Whanna Do?");
+			if (input.equals("exit")||input.equals("quit")||input.equals("exitgame")) {
+				break;
+			}
+			Actions.Basics.doAction(input);
+		}
 	}
 }
