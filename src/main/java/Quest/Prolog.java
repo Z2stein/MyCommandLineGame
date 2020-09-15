@@ -11,14 +11,14 @@ public class Prolog {
 		this.character=character;
 	}
 
-	private static void ak1_crash() {
+	private static void ak1_unknown() {
 		
-		EzLog.log("Test",'1');
+		EzLog.log("you wake up. It's dark, night. No sound. You feel the grass tickling you.",'1');
 		
 	}
 
 	public void startNewStory() {
-		ak1_crash();
+		ak1_unknown();
 	}
 	
 }

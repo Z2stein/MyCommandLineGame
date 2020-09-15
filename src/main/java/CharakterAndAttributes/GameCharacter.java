@@ -3,38 +3,37 @@ package CharakterAndAttributes;
 import CharakterAndAttributes.Race.Human;
 import CharakterAndAttributes.Race.Warrior;
 import Support.EzLog;
+import Support.FormatingOut;
+import World.Field;
+import World.WorldMap;
 
 public class GameCharacter {
 	private String name;
 	private int age;
 	private CharRace race;
 	private Charclass cClass;
+	private Field currentField;
 	//TODO
 	
-	public GameCharacter() {
+	public GameCharacter(int[] fieldCoordinates) {
 		this.name = EzLog.in("What is your Name");
 		
 		age = Integer.parseInt(
 				EzLog.in("How old are you?"));
 		race = new Human();
 		cClass = new Warrior();
+		
+		currentField = WorldMap.getField(fieldCoordinates);
 	}
 
 	public void getAllInfo() {
-		String strRace = getLastPackage(
+		String strRace = FormatingOut.getLastPackage(
 				race.getClass().getName());
-		String strClass = getLastPackage(
+		String strClass = FormatingOut.getLastPackage(
 				cClass.getClass().getName());
 		
 		System.out.println("You are "+name+", a "+age+" year old " +strRace+". Your Class is "+strClass);
 	}
 
-	private String getLastPackage(String strRace) {
-		String resStr
-		=strRace.substring(strRace.indexOf('.')+1);
-		if (strRace!=resStr) {
-			resStr=getLastPackage(resStr);
-		}
-		return resStr;
-	}
+
 }
