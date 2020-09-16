@@ -14,17 +14,17 @@ public class ChangeField {
 		GameCharacter currentMainCharakter = Main.getCharacter();
 
 		if (checkIfNewCoordinatesValid(coordinateDelta, currentMainCharakter)) {
-			int[] newCoord = null;
+			int[] newCoord = {0,0};
 			newCoord[0] = coordinateDelta[0] + currentMainCharakter.getCharakterPosition()[0];
 			newCoord[1] = coordinateDelta[1] + currentMainCharakter.getCharakterPosition()[1];
 
 			currentMainCharakter.setCurrentField(WorldMap.getField(newCoord));
 			EzLog.log("You moved in Direction '"+direction+"'", 'a');
-			EzLog.log("Your current position is "+currentMainCharakter.getCharakterPosition().toString(), 'a');
+			EzLog.log("Your current position is "+currentMainCharakter.getCharakterPositionStr(), 'a');
 			
 		} else {
 			EzLog.log("You tried to exeed the map, but you are not able to", 'e');
-			EzLog.log("Your current position is "+currentMainCharakter.getCharakterPosition().toString(), 'e');
+			EzLog.log("Your current position is "+currentMainCharakter.getCharakterPositionStr(), 'e');
 		}
 		
 
@@ -35,7 +35,7 @@ public class ChangeField {
 
 		int worldDim = WorldMap.getWorldDimension();
 
-		int[] newCoord = null;
+		int[] newCoord = {0,0};
 		for (int i = 0; i < coordinateOfChar.length; i++) {
 			newCoord[i] = coordinateDelta[i] + coordinateOfChar[i];
 			if (newCoord[i] < 0 && newCoord[i] >= worldDim) {

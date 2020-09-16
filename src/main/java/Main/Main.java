@@ -11,6 +11,9 @@ public class Main {
 
 	private static int fieldSize=5;
 	
+	public static void setCharacter(GameCharacter character) {
+		Main.character = character;
+	}
 	public static GameCharacter getCharacter() {
 		return character;
 	}
@@ -20,7 +23,7 @@ public class Main {
 
 		int[] charCoordinates = {(int)fieldSize/2,(int)fieldSize/2};
 		
-		character = new GameCharacter(charCoordinates);
+		setCharacter(new GameCharacter(charCoordinates));
 		
 		character.getAllInfo();
 		

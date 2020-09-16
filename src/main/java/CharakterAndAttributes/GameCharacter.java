@@ -22,7 +22,6 @@ public class GameCharacter {
 				EzLog.in("How old are you?"));
 		race = new Human();
 		cClass = new Warrior();
-		
 		setCurrentField(WorldMap.getField(fieldCoordinates));
 	}
 
@@ -45,6 +44,12 @@ public class GameCharacter {
 
 	public void setCurrentField(Field currentField) {
 		this.currentField = currentField;
+	}
+
+	public String getCharakterPositionStr() {
+		String resStr;
+		resStr = "["+getCharakterPosition()[0]+"|"+getCharakterPosition()[1]+"]";
+		return resStr;
 	}
 
 

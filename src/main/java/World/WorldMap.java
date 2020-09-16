@@ -11,15 +11,19 @@ public class WorldMap {
 		worldDimension = size;
 		grid = new Field[size][size];
 		int chooseInt;
-		int x = 0,y=0;;
-		for (Field[] fieldX : grid) {
-			for (Field fieldY : fieldX) {
+		int x = 0;
+		int y=0;
+		
+		for (int i = 0; i < grid.length; i++) {
+			
+			for (int j = 0; j < grid[0].length; j++) {
 				chooseInt = (int) (Math.random() * 4); 
 				int[] coordinates = {x,y};
-				fieldY = Field.createField(chooseInt,coordinates);
-				fieldY.setCoordinates(coordinates);
+				grid[i][j] = Field.createField(chooseInt,coordinates);
+				grid[i][j] .setCoordinates(coordinates);
 				y++;
 			}
+			y=0;
 			x++;
 		}
 	}
