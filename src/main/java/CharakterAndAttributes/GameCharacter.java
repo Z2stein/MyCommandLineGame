@@ -23,7 +23,7 @@ public class GameCharacter {
 		race = new Human();
 		cClass = new Warrior();
 		
-		currentField = WorldMap.getField(fieldCoordinates);
+		setCurrentField(WorldMap.getField(fieldCoordinates));
 	}
 
 	public void getAllInfo() {
@@ -33,6 +33,18 @@ public class GameCharacter {
 				cClass.getClass().getName());
 		
 		System.out.println("You are "+name+", a "+age+" year old " +strRace+". Your Class is "+strClass);
+	}
+	
+	public int[] getCharakterPosition() {
+		return currentField.getCoordinates();
+	}
+	
+	public Field getCurrentField() {
+		return currentField;
+	}
+
+	public void setCurrentField(Field currentField) {
+		this.currentField = currentField;
 	}
 
 

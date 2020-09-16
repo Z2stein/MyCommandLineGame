@@ -12,14 +12,9 @@ public class Basics {
 		setHelpHashMap();
 	}
 
-	public static void doAction(String ActionString) {
+	public static void doAction(String ActionString) throws Exception {
 		String[] splittedStr = splitStrings(ActionString);
-
-		
-		for (String string : splittedStr) {
-			System.out.println(string);
-		}
-		
+	
 		switch (splittedStr[0]) {
 		case "help":
 			if (splittedStr[1]=="") {
@@ -29,8 +24,10 @@ public class Basics {
 			}
 			break;
 		case "moveto":
+			ChangeField.moveTo(splittedStr[1]);
 			break;
 		default:
+			System.out.println("unknown command, try 'help' to see all valid arguments");
 			break;
 		}
 	}
@@ -38,19 +35,18 @@ public class Basics {
 	private static String[] splitStrings(String actionString) {
 		String[] resultString= {actionString,""};
 		
-		
 		if (actionString.indexOf(' ')==-1) {
 			return resultString ;
 		}
 		
 		resultString[0] = actionString.substring(0, actionString.indexOf(' '));
-		resultString[1] = actionString.substring(actionString.indexOf(' ') + 2);
+		resultString[1] = actionString.substring(actionString.indexOf(' ') + 1);
 		return resultString;
 	}
 
 	private static void setHelpHashMap() {
 
-		String[][] pairs = { { "moveTo", "Moving 'n'-> North, 's' -> South, 'e' -> east. 'w' -> west" },
+		String[][] pairs = { { "moveto", "Moving 'n'-> North, 's' -> South, 'e' -> east. 'w' -> west" },
 				{"exit", "exit game"}
 		};
 		helpMap = new HashMap<String, String>();

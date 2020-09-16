@@ -13,40 +13,40 @@ public class EzLog {
 		userIn = new Scanner(System.in);
 
 		String actualDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
-		log("##############################", (char) 0);
-		log("######  Initalize Loger  #####", (char) 0);
-		log("###  " + actualDateTime + "   ###", (char) 0);
-		log("##############################", (char) 0);
+		log("##############################",  0);
+		log("######  Initalize Loger  #####",  0);
+		log("###  " + actualDateTime + "   ###",  0);
+		log("##############################",  0);
 	}
 
 	public static void log(String massage, char c) {
+		String prefix = "";
+		String surfix = "";
 
-		if (Character.isDigit(c)) {
+		switch (c) {
+		case 'a':
+			prefix = "  -  ";
+			surfix=prefix;
+			break;
+		case 'e':
+			prefix = " !-  ";
+			surfix="  -  ";
+			break;
 
-			int n = Character.getNumericValue(c);
-
-			String prefix = "";
-
-			if (n != 0) {
-				prefix = "###";
-				for (int i = 1; i < n + 1; i++) {
-					prefix = prefix + "--";
-				}
-				prefix = prefix + "->  ";
-			}
-
-			System.out.println(prefix + massage);
-			try {
-				FileLogger.writeToExistingFile(prefix + massage);
-			} catch (IOException e) {
-				System.out.println("Error in FileLogger: Was not ABle to Log to FIle ");
-				e.printStackTrace();
-			}
-		} else if (Character.isLetter(c)) {
-			// ToDo
-		} else {
-			// ToDo
+		default:
+			break;
 		}
+
+		System.out.println(prefix+massage+surfix);
+		
+		if(c=='e') return;
+		try {
+			FileLogger.writeToExistingFile(prefix+massage+surfix);
+		} catch (IOException e) {
+			System.out.println("Error in FileLogger: Was not ABle to Log to FIle ");
+			e.printStackTrace();
+		}	
+		
 	}
 
 	public static String in(String question) {
@@ -59,5 +59,27 @@ public class EzLog {
 		String resStr = "-------------------------------------";
 		resStr = str1 + " " + resStr.substring(str1.length()) + " " + str2;
 		System.out.println("# " + resStr);
+	}
+
+	public static void log(String massage, int n) {
+
+
+		String prefix = "";
+
+		if (n != 0) {
+			prefix = "###";
+			for (int i = 1; i < n + 1; i++) {
+				prefix = prefix + "--";
+			}
+			prefix = prefix + "->  ";
+		}
+
+		System.out.println(prefix + massage);
+		try {
+			FileLogger.writeToExistingFile(prefix + massage);
+		} catch (IOException e) {
+			System.out.println("Error in FileLogger: Was not ABle to Log to FIle ");
+			e.printStackTrace();
+		}		
 	}
 }

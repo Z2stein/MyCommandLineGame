@@ -7,20 +7,19 @@ import World.Fields.Swamp;
 
 public abstract class Field {
 	
-	protected int movementSpeed;
 	protected int movementExhausting;
 	protected int[] coordinates;
 	
-	public int getMovementSpeed() {
-		return movementSpeed;
-	}
-	
+
 	public int getMovementExhausting() {
 		return movementExhausting;
 	}
 	
 	public int[] getCoordinates() {
 		return coordinates;
+	}
+	public void setCoordinates(int[] coordinates) {
+		this.coordinates = coordinates;
 	}
 	
 	static public Field createField(int chooseInt, int[] fieldCoordinates) {

@@ -1,3 +1,4 @@
+package Main;
 import CharakterAndAttributes.GameCharacter;
 import Quest.Prolog;
 import Support.EzLog;
@@ -25,8 +26,6 @@ public class Main {
 		
 		quest = new Quest.Prolog(character);
 		quest.startNewStory();
-		
-		
 		String input;
 		while(true) {
 			input=EzLog.in("What Do You wanna Do?").toLowerCase();

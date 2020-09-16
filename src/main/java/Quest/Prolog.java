@@ -13,7 +13,7 @@ public class Prolog {
 
 	private static void ak1_unknown() {
 		
-		EzLog.log("you wake up. It's dark, night. No sound. You feel the grass tickling you.",'1');
+		EzLog.log("you wake up. It's dark, night. No sound. You feel the grass tickling you.",1);
 		
 	}
 
