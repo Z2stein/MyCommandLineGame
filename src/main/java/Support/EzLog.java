@@ -29,6 +29,7 @@ public class EzLog {
 			surfix=prefix;
 			break;
 		case 'e':
+			//exeption
 			prefix = " !-  ";
 			surfix="  -  ";
 			break;

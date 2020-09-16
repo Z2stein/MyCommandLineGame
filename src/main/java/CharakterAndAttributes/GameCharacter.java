@@ -25,6 +25,16 @@ public class GameCharacter {
 		setCurrentField(WorldMap.getField(fieldCoordinates));
 	}
 
+	public GameCharacter(String name, int age,int[] fieldCoordinates) {
+		this.name = name;
+		
+		this.age = age;
+		race = new Human();
+		cClass = new Warrior();
+		setCurrentField(WorldMap.getField(fieldCoordinates));
+
+	}
+
 	public void getAllInfo() {
 		String strRace = FormatingOut.getLastPackage(
 				race.getClass().getName());

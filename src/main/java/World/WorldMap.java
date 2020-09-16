@@ -35,4 +35,8 @@ public class WorldMap {
     public static int getWorldDimension() {
 		return worldDimension;
 	}
+
+	public static void setWorldDimension(int worldDimension) {
+		WorldMap.worldDimension = worldDimension;
+	}
 }

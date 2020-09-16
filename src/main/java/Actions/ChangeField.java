@@ -30,7 +30,7 @@ public class ChangeField {
 
 	}
 
-	private static boolean checkIfNewCoordinatesValid(int[] coordinateDelta, GameCharacter currentMainCharakter) {
+	protected static boolean checkIfNewCoordinatesValid(int[] coordinateDelta, GameCharacter currentMainCharakter) {
 		int[] coordinateOfChar = currentMainCharakter.getCharakterPosition();
 
 		int worldDim = WorldMap.getWorldDimension();
@@ -38,7 +38,7 @@ public class ChangeField {
 		int[] newCoord = {0,0};
 		for (int i = 0; i < coordinateOfChar.length; i++) {
 			newCoord[i] = coordinateDelta[i] + coordinateOfChar[i];
-			if (newCoord[i] < 0 && newCoord[i] >= worldDim) {
+			if (newCoord[i] < 0 || newCoord[i] >= worldDim) {
 				return false;
 			}
 			;
@@ -46,7 +46,7 @@ public class ChangeField {
 		return true;
 	}
 
-	private static int[] charDirectionToIntArray(String direction) throws Exception {
+	protected static int[] charDirectionToIntArray(String direction) {
 
 		int[] fieldDelta = { 0, 0 };
 
@@ -69,7 +69,7 @@ public class ChangeField {
 			break;
 
 		default:
-			throw new Exception();
+			EzLog.log("UnValid moveto direction use n,s,w ore", 'e');
 		}
 		return fieldDelta;
 	}
