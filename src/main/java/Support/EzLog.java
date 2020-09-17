@@ -33,6 +33,11 @@ public class EzLog {
 			prefix = " !-  ";
 			surfix="  -  ";
 			break;
+		case '!':
+			//exeption
+			prefix = " !!!!!!!-  ";
+			surfix="  -!!!!!!!  ";
+			break;
 
 		default:
 			break;

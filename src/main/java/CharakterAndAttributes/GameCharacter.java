@@ -1,7 +1,7 @@
 package CharakterAndAttributes;
 
+import CharakterAndAttributes.Class.Warrior;
 import CharakterAndAttributes.Race.Human;
-import CharakterAndAttributes.Race.Warrior;
 import Support.EzLog;
 import Support.FormatingOut;
 import World.Field;
@@ -11,9 +11,17 @@ public class GameCharacter {
 	private String name;
 	private int age;
 	private CharRace race;
-	private Charclass cClass;
+	private CharClass cClass;
 	private Field currentField;
-	//TODO
+	
+	protected int condition;
+	protected int strength;
+	protected int agitily;
+	protected int intelligence;
+	
+
+	
+	
 	
 	public GameCharacter(int[] fieldCoordinates) {
 		this.name = EzLog.in("What is your Name");
