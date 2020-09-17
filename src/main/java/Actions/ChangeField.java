@@ -3,33 +3,44 @@ package Actions;
 import CharakterAndAttributes.GameCharacter;
 import Main.Main;
 import Support.EzLog;
+import Support.FormatingOut;
 import World.WorldMap;
 
 public class ChangeField {
 
 	public static void moveTo(String direction) throws Exception {
 
-		int[] coordinateDelta = charDirectionToIntArray(direction);
+		int[] deltaCoord = charDirectionToIntArray(direction);
 
-		GameCharacter currentMainCharakter = Main.getCharacter();
-
-		if (checkIfNewCoordinatesValid(coordinateDelta, currentMainCharakter)) {
-			int[] newCoord = {0,0};
-			newCoord[0] = coordinateDelta[0] + currentMainCharakter.getCharakterPosition()[0];
-			newCoord[1] = coordinateDelta[1] + currentMainCharakter.getCharakterPosition()[1];
-
-			currentMainCharakter.setCurrentField(WorldMap.getField(newCoord));
-			EzLog.log("You moved in Direction '"+direction+"'", 'a');
-			EzLog.log("Your current position is "+currentMainCharakter.getCharakterPositionStr(), 'a');
+		GameCharacter currChar = Main.getCharacter();
+		if (moveTo(currChar, deltaCoord)) {
+			String fieldType = FormatingOut.getLastPackage(WorldMap.getField(currChar.getCharakterPosition()).getClass().getName());
+			
+			EzLog.log("You moved in Direction '"+direction+"' and arrived at a new Area. Its a "+fieldType, 'a');
+			EzLog.log("Your current position is "+currChar.getCharakterPositionStr(), 'a');
 			
 		} else {
 			EzLog.log("You tried to exeed the map, but you are not able to", 'e');
-			EzLog.log("Your current position is "+currentMainCharakter.getCharakterPositionStr(), 'e');
+			EzLog.log("Your current position is "+currChar.getCharakterPositionStr(), 'e');
 		}
 		
-
+ 
 	}
 
+	public static boolean moveTo(GameCharacter character, int[] deltaCoord) {
+		
+		int[] newCoord = {0,0};
+		if (checkIfNewCoordinatesValid(deltaCoord, character)) {
+			newCoord[0] = deltaCoord[0] + character.getCharakterPosition()[0];
+			newCoord[1] = deltaCoord[1] + character.getCharakterPosition()[1];
+
+			character.switchField(newCoord);
+			return true;
+		}
+	return false;
+	}
+	
+	
 	protected static boolean checkIfNewCoordinatesValid(int[] coordinateDelta, GameCharacter currentMainCharakter) {
 		int[] coordinateOfChar = currentMainCharakter.getCharakterPosition();
 
@@ -69,7 +80,7 @@ public class ChangeField {
 			break;
 
 		default:
-			EzLog.log("UnValid moveto direction use n,s,w ore", 'e');
+			EzLog.log("UnValid moveto direction use n,s,w or e", 'e');
 		}
 		return fieldDelta;
 	}

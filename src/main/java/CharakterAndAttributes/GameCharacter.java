@@ -23,7 +23,8 @@ public class GameCharacter {
 		race = new Human();
 		cClass = new Warrior();
 		setCurrentField(WorldMap.getField(fieldCoordinates));
-	}
+		this.currentField.addCharakter(this);
+	} 
 
 	public GameCharacter(String name, int age,int[] fieldCoordinates) {
 		this.name = name;
@@ -32,7 +33,7 @@ public class GameCharacter {
 		race = new Human();
 		cClass = new Warrior();
 		setCurrentField(WorldMap.getField(fieldCoordinates));
-
+		this.currentField.addCharakter(this);
 	}
 
 	public void getAllInfo() {
@@ -60,6 +61,13 @@ public class GameCharacter {
 		String resStr;
 		resStr = "["+getCharakterPosition()[0]+"|"+getCharakterPosition()[1]+"]";
 		return resStr;
+	}
+
+	public void switchField(int[] newCoord) {
+		this.getCurrentField().removeCharakter(this);
+		Field newField = WorldMap.getField(newCoord);
+		newField.addCharakter(this);
+		setCurrentField(newField);
 	}
 
 

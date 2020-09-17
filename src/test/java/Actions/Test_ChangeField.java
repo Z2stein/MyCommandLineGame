@@ -10,20 +10,20 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import CharakterAndAttributes.GameCharacter;
+import Test.SuperTest;
 import World.WorldMap;
 
-public class Test_ChangeField{
+public class Test_ChangeField extends SuperTest{
+
+	private GameCharacter mainChar;
 
 	@BeforeClass
 	public void Setup() {
 
-		final int fieldSize = 5;
-
-		WorldMap.createWorldGrid(fieldSize);
-
 		int[] charCoordinates = { 2,2 };
 
-		Main.Main.setCharacter(new GameCharacter("testchat", 25,charCoordinates));
+		mainChar = new GameCharacter("testchat", 25,charCoordinates);
+		Main.Main.setCharacter(mainChar);
 
 	}
 
@@ -65,8 +65,18 @@ public class Test_ChangeField{
 
 	}
 
-	@Test(priority=103)
-	public void moveToTest() {
-		throw new RuntimeException("Test not implemented");
+	@Test(priority=104)
+	public void moveToTest() throws Exception {
+		
+		ChangeField.moveTo("n");
+		
+		Assert.assertEquals(
+		mainChar.getCharakterPosition(),
+		new int[] {2,3});
+		
+		ChangeField.moveTo(mainChar, new int[] {0,-1});
+		Assert.assertEquals(
+				mainChar.getCharakterPosition(),
+				new int[] {2,2});
 	}
 }

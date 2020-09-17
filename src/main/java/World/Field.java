@@ -1,5 +1,8 @@
 package World;
 
+import java.util.ArrayList;
+
+import CharakterAndAttributes.GameCharacter;
 import World.Fields.Desert;
 import World.Fields.Forest;
 import World.Fields.Prairie;
@@ -7,6 +10,8 @@ import World.Fields.Swamp;
 
 public abstract class Field {
 	
+	
+	ArrayList<GameCharacter> charaktersAtField= new ArrayList<>();
 	protected int movementExhausting;
 	protected int[] coordinates;
 	
@@ -40,5 +45,19 @@ public abstract class Field {
 		}
 	}
 
+	public void addCharakter(GameCharacter gameCharacter) {
+		charaktersAtField.add(gameCharacter);
+	}
+	public void removeCharakter(GameCharacter gameCharacter) {
+		charaktersAtField.remove(gameCharacter);
+	}
+
+	public ArrayList<GameCharacter> getCharaktersAtField() {
+		return charaktersAtField;
+	}
+	
+	public void setCharaktersAtField(ArrayList<GameCharacter> charaktersAtField) {
+		this.charaktersAtField = charaktersAtField;
+	}
 
 }
