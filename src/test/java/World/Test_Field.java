@@ -2,9 +2,6 @@ package World;
 
 import static org.testng.Assert.assertEquals;
 
-import java.util.ArrayList;
-
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import CharakterAndAttributes.GameCharacter;
@@ -15,12 +12,7 @@ public class Test_Field extends SuperTest {
 	private GameCharacter character;
 	private Field field;
 
-	@AfterClass()
-	public void cleanUp() {
-	field.setCharaktersAtField(new ArrayList<GameCharacter>());
-	}
-	
-	
+
 	@Test(priority = 101)
 	public void addCharakterTest() {
 		field = WorldMap.getField(new int[] { 0, 0 });

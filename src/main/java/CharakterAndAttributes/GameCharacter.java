@@ -23,14 +23,27 @@ public class GameCharacter {
 	
 
 	public GameCharacter(String name,CharakterAndAttributes.Race.CharRace race , int age,int[] fieldCoordinates) {
+		//TODO delete
+		System.out.println("+************++1  "+WorldMap.getNumberOfCharsAtMap());
+		
 		this.name = name;
 		
 		this.age = age;
 		cClass = new Warrior();
 		this.currentField = (WorldMap.getField(fieldCoordinates));
+		
+		//TODO delete
+		System.out.println("+************++2  "+WorldMap.getNumberOfCharsAtMap());
+
+		
 		this.currentField.addCharakter(this);
+		//TODO delete
+		System.out.println("+************++3  "+WorldMap.getNumberOfCharsAtMap());
 		this.race = race;
 		this.setRaceClass(race);
+		
+		
+
 		
 	}
 
@@ -144,7 +157,10 @@ String strRace = race.name();
 
 
 	public static GameCharacter createRandom(String name,int[] fieldCoordinates) {
-		return new GameCharacter(name, CharRace.Human, 24, fieldCoordinates);
+		GameCharacter tempCharacter = new GameCharacter(name, CharRace.Human, 24, fieldCoordinates); 
+		//TODO delete
+		System.out.println("++------"+WorldMap.getNumberOfCharsAtMap());
+		return tempCharacter ;
 	}
 
 

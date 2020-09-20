@@ -44,11 +44,28 @@ public class WorldMap {
 	public static void createAndSetRandChars(int n) {
 		for (int i = 0; i < n; i++) {
 			int[] randCoord =	{(int) Math.random()*worldDimension,(int) Math.random()*worldDimension};
+			//TODO delete
+			System.out.println("++++"+WorldMap.getNumberOfCharsAtMap());
 			GameCharacter.createRandom("RandomChar"+i, randCoord);
+			grid=grid;
+			//TODO delete
+			System.out.println("++++"+WorldMap.getNumberOfCharsAtMap());
+			
 		} 
 	}
 
 	public static Field[][] getGrid() {
 		return grid;
+	}
+
+	public static int getNumberOfCharsAtMap() {
+		int counter = 0;
+		Field[][] grid = WorldMap.getGrid();
+		for (Field[] fields : grid) {
+			for (Field field : fields) {
+				counter += field.getCharaktersAtField().size();
+			}
+		}	
+		return counter;
 	}
 }

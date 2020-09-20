@@ -2,42 +2,27 @@ package World;
 
 import static org.testng.Assert.assertEquals;
 
-import java.util.ArrayList;
-
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-import CharakterAndAttributes.GameCharacter;
 import Test.SuperTest;
 
 public class Test_Other extends SuperTest {
+	
 	@Test
 	public void RandomCharakterTest() {
 		int numberOfChars = 5;
-
+		//TODO delete
+		System.out.println(WorldMap.getNumberOfCharsAtMap());
+		
 		WorldMap.createAndSetRandChars(numberOfChars);
-		int counter = 0;
+		//TODO delete
+		System.out.println(WorldMap.getNumberOfCharsAtMap());
+		
+		//TODO Delete
+		System.out.println(
+		WorldMap.getField(new int[] {0,0}).getCharaktersAtField().size()+"\n"+WorldMap.getNumberOfCharsAtMap()
+				);
 
-		Field[][] grid = WorldMap.getGrid();
-
-		for (Field[] fields : grid) {
-			for (Field field : fields) {
-				counter += field.getCharaktersAtField().size();
-			}
-		}
-
-		assertEquals(counter, numberOfChars, "The total number of chartacters is not like the expected");
-	}
-
-	@AfterClass
-	public void clearUp() {
-		Field[][] grid = WorldMap.getGrid();
-		ArrayList<GameCharacter> charaktersAtField = null;
-
-		for (Field[] fields : grid) {
-			for (Field field : fields) {
-				field.setCharaktersAtField(charaktersAtField);
-			}
-		}
+		assertEquals(WorldMap.getNumberOfCharsAtMap(), numberOfChars, "The total number of chartacters is not like the expected");
 	}
 }

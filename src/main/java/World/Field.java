@@ -11,7 +11,7 @@ import World.Fields.Swamp;
 public abstract class Field {
 	
 	
-	protected ArrayList<GameCharacter> charaktersAtField= new ArrayList<>();
+	protected ArrayList<GameCharacter> charaktersAtField;
 	protected int movementExhausting;
 	protected int[] coordinates;
 	
@@ -28,6 +28,7 @@ public abstract class Field {
 	}
 	
 	static public Field createField(int chooseInt, int[] fieldCoordinates) {
+		
 		
 		Field type;
 		
@@ -46,7 +47,8 @@ public abstract class Field {
 	}
 
 	public void addCharakter(GameCharacter gameCharacter) {
-		charaktersAtField.add(gameCharacter);
+		
+		this.charaktersAtField.add(gameCharacter);
 	}
 	public void removeCharakter(GameCharacter gameCharacter) {
 		charaktersAtField.remove(gameCharacter);
