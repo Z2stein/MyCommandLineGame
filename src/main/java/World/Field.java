@@ -11,7 +11,7 @@ import World.Fields.Swamp;
 public abstract class Field {
 	
 	
-	ArrayList<GameCharacter> charaktersAtField= new ArrayList<>();
+	protected ArrayList<GameCharacter> charaktersAtField= new ArrayList<>();
 	protected int movementExhausting;
 	protected int[] coordinates;
 	

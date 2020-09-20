@@ -1,7 +1,14 @@
 package CharakterAndAttributes.Race;
 
-import CharakterAndAttributes.CharRace;
+import CharakterAndAttributes.CharAction;
+import CharakterAndAttributes.GameCharacter;
 
-public class Orc extends CharRace {
+public class Orc implements CharAction {
+
+	private GameCharacter gameChar;
+
+	public Orc(GameCharacter gameCharacter) {
+		this.gameChar = gameCharacter;
+	}
 
 }

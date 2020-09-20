@@ -1,6 +1,7 @@
 package CharakterAndAttributes;
 
 import CharakterAndAttributes.Class.Warrior;
+import CharakterAndAttributes.Race.CharRace;
 import CharakterAndAttributes.Race.Human;
 import Support.EzLog;
 import Support.FormatingOut;
@@ -10,7 +11,6 @@ import World.WorldMap;
 public class GameCharacter {
 	private String name;
 	private int age;
-	private CharRace race;
 	private CharClass cClass;
 	private Field currentField;
 	
@@ -18,39 +18,53 @@ public class GameCharacter {
 	protected int strength;
 	protected int agitily;
 	protected int intelligence;
+	protected CharAction chrActClass;
+	protected CharRace race;
 	
 
-	
-	
-	
-	public GameCharacter(int[] fieldCoordinates) {
-		this.name = EzLog.in("What is your Name");
-		
-		age = Integer.parseInt(
-				EzLog.in("How old are you?"));
-		race = new Human();
-		cClass = new Warrior();
-		setCurrentField(WorldMap.getField(fieldCoordinates));
-		this.currentField.addCharakter(this);
-	} 
-
-	public GameCharacter(String name, int age,int[] fieldCoordinates) {
+	public GameCharacter(String name,CharakterAndAttributes.Race.CharRace race , int age,int[] fieldCoordinates) {
 		this.name = name;
 		
 		this.age = age;
-		race = new Human();
 		cClass = new Warrior();
-		setCurrentField(WorldMap.getField(fieldCoordinates));
+		this.currentField = (WorldMap.getField(fieldCoordinates));
 		this.currentField.addCharakter(this);
+		this.race = race;
+		this.setRaceClass(race);
+		
+	}
+
+
+	private void setRaceClass(CharakterAndAttributes.Race.CharRace charRace) {
+		
+		switch (charRace) {
+		case Human:
+			this.chrActClass = new CharakterAndAttributes.Race.Human(this);
+			break;
+		case Orc:
+			this.chrActClass = new CharakterAndAttributes.Race.Orc(this);
+			break;
+
+		default:
+			break;
+		}
+
 	}
 
 	public void getAllInfo() {
-		String strRace = FormatingOut.getLastPackage(
-				race.getClass().getName());
+
+String strRace = race.name();
 		String strClass = FormatingOut.getLastPackage(
 				cClass.getClass().getName());
 		
 		System.out.println("You are "+name+", a "+age+" year old " +strRace+". Your Class is "+strClass);
+	}
+	
+	
+	public void doAttack(GameCharacter targetChar) {
+		
+		
+		
 	}
 	
 	public int[] getCharakterPosition() {
@@ -72,11 +86,74 @@ public class GameCharacter {
 	}
 
 	public void switchField(int[] newCoord) {
-		this.getCurrentField().removeCharakter(this);
+		removeCharacter();
 		Field newField = WorldMap.getField(newCoord);
 		newField.addCharakter(this);
 		setCurrentField(newField);
 	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public int getAge() {
+		return age;
+	}
+
+
+	public CharClass getcClass() {
+		return cClass;
+	}
+
+
+	public CharAction getChrActClass() {
+		return chrActClass;
+	}
+
+
+	public CharRace getRace() {
+		return race;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+
+	public void setcClass(CharClass cClass) {
+		this.cClass = cClass;
+	}
+
+
+	public void setChrActClass(CharAction chrActClass) {
+		this.chrActClass = chrActClass;
+	}
+
+
+	public void setRace(CharRace race) {
+		this.race = race;
+	}
+
+
+	public static GameCharacter createRandom(String name,int[] fieldCoordinates) {
+		return new GameCharacter(name, CharRace.Human, 24, fieldCoordinates);
+	}
+
+
+	public void removeCharacter() {
+		this.getCurrentField().removeCharakter(this);
+	}
+
+
+
 
 
 }

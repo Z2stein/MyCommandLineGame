@@ -2,16 +2,13 @@ package Actions;
 
 import static org.testng.Assert.assertEquals;
 
-import java.util.Collection;
-
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import CharakterAndAttributes.GameCharacter;
+import CharakterAndAttributes.Race.CharRace;
 import Test.SuperTest;
-import World.WorldMap;
 
 public class Test_ChangeField extends SuperTest{
 
@@ -22,7 +19,7 @@ public class Test_ChangeField extends SuperTest{
 
 		int[] charCoordinates = { 2,2 };
 
-		mainChar = new GameCharacter("testchat", 25,charCoordinates);
+		mainChar = new GameCharacter("testchat",CharRace.Human, 25,charCoordinates);
 		Main.Main.setCharacter(mainChar);
 
 	}
@@ -61,7 +58,7 @@ public class Test_ChangeField extends SuperTest{
 		boolean actual =
 		ChangeField.checkIfNewCoordinatesValid(coordinateDelta, currentMainCharakter);
 		
-		Assert.assertEquals(actual, expected);
+		assertEquals(actual, expected);
 
 	}
 
@@ -70,12 +67,12 @@ public class Test_ChangeField extends SuperTest{
 		
 		ChangeField.moveTo("n");
 		
-		Assert.assertEquals(
+assertEquals(
 		mainChar.getCharakterPosition(),
 		new int[] {2,3});
 		
 		ChangeField.moveTo(mainChar, new int[] {0,-1});
-		Assert.assertEquals(
+		assertEquals(
 				mainChar.getCharakterPosition(),
 				new int[] {2,2});
 	}

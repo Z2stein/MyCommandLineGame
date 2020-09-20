@@ -1,7 +1,14 @@
 package CharakterAndAttributes.Race;
 
-import CharakterAndAttributes.CharRace;
+import CharakterAndAttributes.CharAction;
+import CharakterAndAttributes.GameCharacter;
 
-public class Human extends CharRace {
+public class Human implements CharAction{
+
+	private GameCharacter gameChar;
+
+	public Human(GameCharacter gameCharacter) {
+		this.gameChar = gameCharacter;
+	}
 
 }

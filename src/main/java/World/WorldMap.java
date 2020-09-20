@@ -1,5 +1,6 @@
 package World;
 
+import CharakterAndAttributes.GameCharacter;
 import Support.FormatingOut;
 
 public class WorldMap {
@@ -38,5 +39,16 @@ public class WorldMap {
 
 	public static void setWorldDimension(int worldDimension) {
 		WorldMap.worldDimension = worldDimension;
+	}
+
+	public static void createAndSetRandChars(int n) {
+		for (int i = 0; i < n; i++) {
+			int[] randCoord =	{(int) Math.random()*worldDimension,(int) Math.random()*worldDimension};
+			GameCharacter.createRandom("RandomChar"+i, randCoord);
+		} 
+	}
+
+	public static Field[][] getGrid() {
+		return grid;
 	}
 }

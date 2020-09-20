@@ -1,4 +1,4 @@
-package CharakterAndAttributes;
+
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -40,7 +40,6 @@ public class CharRace {
 	
 	protected static void initalizeAttributes() {
 
-	Draw
 	
 	}
 	
