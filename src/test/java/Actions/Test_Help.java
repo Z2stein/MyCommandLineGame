@@ -14,4 +14,5 @@ public class Test_Help extends SuperTest {
 		boolean actual = EzLog.getLastConsoleOutput().contains("Moving 'n'-> North, 's' -> So");
 		assertTrue(actual,"Wrong help answere for 'Help moveto'");
 	}
+	
 }

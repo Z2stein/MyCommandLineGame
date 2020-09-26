@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
 import CharakterAndAttributes.GameCharacter;
+import CharakterAndAttributes.Class.CharClass;
 import CharakterAndAttributes.Race.CharRace;
 import Support.EzLog;
 import Support.FormatingOut;
@@ -48,7 +49,7 @@ public class SuperTest {
 	}
 
 	public static GameCharacter getTestChar() {
-		GameCharacter character = new GameCharacter("TestChar", CharRace.Human, 24, new int[] { 2, 2 });
+		GameCharacter character = new GameCharacter("TestChar", CharRace.Human,CharClass.Warrior ,24, new int[] { 2, 2 });
 		characters.add(character);
 		return character;
 	}

@@ -1,6 +1,7 @@
 package Main;
 
 import CharakterAndAttributes.GameCharacter;
+import CharakterAndAttributes.Class.CharClass;
 import CharakterAndAttributes.Race.CharRace;
 import Quest.Prolog;
 import Support.EzLog;
@@ -27,7 +28,7 @@ public class Main {
 
 		CharRace race = CharRace.valueOf(EzLog.in("What is Your Race?"));
 
-		character = (new GameCharacter(name, race, age, charCoordinates));
+		character = (new GameCharacter(name, race,CharClass.Warrior, age, charCoordinates));
 
 		character.getAllInfo();
 

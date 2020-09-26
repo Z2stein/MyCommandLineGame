@@ -6,6 +6,7 @@ import static org.testng.Assert.assertNotEquals;
 import org.testng.annotations.Test;
 
 import CharakterAndAttributes.GameCharacter;
+import CharakterAndAttributes.Class.CharClass;
 import CharakterAndAttributes.Race.CharRace;
 import Test.SuperTest;
 
@@ -21,7 +22,7 @@ public class Test_Field extends SuperTest {
 	@Test
 	public void addCharakterTest() {
 		field = WorldMap.getField(new int[] { 0, 0 });
-		character = new GameCharacter("TestChar", CharRace.Human,24, new int[] { 0, 0 });
+		character = new GameCharacter("TestChar", CharRace.Human,CharClass.Warrior,24, new int[] { 0, 0 });
 		assertEquals(field.getCharaktersAtField().size(), 1);
 	}
 	
@@ -43,7 +44,7 @@ public class Test_Field extends SuperTest {
 		int numberOfChars=100;
 		field = WorldMap.getField(new int[] { 0, 0 });
 		for (int i = 0; i < numberOfChars; i++) {
-			character = new GameCharacter("TestChar"+i,CharRace.Human, 24, new int[] { 0, 0 });
+			character = new GameCharacter("TestChar"+i,CharRace.Human,CharClass.Warrior, 24, new int[] { 0, 0 });
 		}
 		assertEquals(field.getCharaktersAtField().size(), numberOfChars);
 	}

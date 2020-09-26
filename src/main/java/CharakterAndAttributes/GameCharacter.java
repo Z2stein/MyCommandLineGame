@@ -1,7 +1,12 @@
 package CharakterAndAttributes;
 
+import CharakterAndAttributes.Class.CharClass;
+import CharakterAndAttributes.Class.CharClassAction;
 import CharakterAndAttributes.Class.Warrior;
 import CharakterAndAttributes.Race.CharRace;
+import CharakterAndAttributes.Race.CharRaceAction;
+import CharakterAndAttributes.Race.Human;
+import CharakterAndAttributes.Race.Orc;
 import Support.FormatingOut;
 import World.Field;
 import World.WorldMap;
@@ -9,34 +14,63 @@ import World.WorldMap;
 public class GameCharacter {
 	private String name;
 	private int age;
-	private CharClass cClass;
 	private Field currentField;
 
-	protected int condition;
-	protected int strength;
-	protected int agitily;
-	protected int intelligence;
-	protected CharAction chrActClass;
-	protected CharRace race;
+	protected CharacterAttributes charAttr;
+	
+	protected BattleAttributes battleAttr;
 
-	public GameCharacter(String name, CharakterAndAttributes.Race.CharRace race, int age, int[] fieldCoordinates) {
+	
+	protected CharRaceAction chrRaceAct;
+	protected CharClassAction chrClassAct;
+	protected CharRace race;
+	protected CharClass cClass;
+
+	public GameCharacter(String name, CharRace race, CharClass cClass, int age, int[] fieldCoordinates) {
 		this.name = name;
 		this.age = age;
-		cClass = new Warrior();
 		this.currentField = (WorldMap.getField(fieldCoordinates));
 		this.currentField.addCharakter(this);
-		this.race = race;
-		this.setRaceClass(race);
+		
+		//Set Race
+		this.race = race; //enum
+		this.setRaceClass(race); //actionClass
+		
+		// Set Class
+		this.cClass = cClass;
+		this.setClassAction(cClass);
+		
+		charAttr=new CharacterAttributes(this);
+		
+		battleAttr=new BattleAttributes(this);
+		
+//		this.setAttributes();
+		
+//TODO Battle Attr		
 	}
 
-	private void setRaceClass(CharakterAndAttributes.Race.CharRace charRace) {
+
+	private void setClassAction(CharClass cClass2) {
+
+		switch (cClass2) {
+		case Warrior:
+			this.chrClassAct = new Warrior();
+			break;
+
+		default:
+			break;
+		}
+	}
+
+
+	private void setRaceClass(CharRace charRace) {
 
 		switch (charRace) {
 		case Human:
-			this.chrActClass = new CharakterAndAttributes.Race.Human(this);
+			this.chrRaceAct = new Human(this);
 			break;
 		case Orc:
-			this.chrActClass = new CharakterAndAttributes.Race.Orc(this);
+			this.chrRaceAct = new Orc(this);
 			break;
 
 		default:
@@ -54,7 +88,9 @@ public class GameCharacter {
 	}
 
 	public void doAttack(GameCharacter targetChar) {
-
+		
+		
+		
 	}
 
 	public int[] getCharakterPosition() {
@@ -94,10 +130,6 @@ public class GameCharacter {
 		return cClass;
 	}
 
-	public CharAction getChrActClass() {
-		return chrActClass;
-	}
-
 	public CharRace getRace() {
 		return race;
 	}
@@ -114,21 +146,30 @@ public class GameCharacter {
 		this.cClass = cClass;
 	}
 
-	public void setChrActClass(CharAction chrActClass) {
-		this.chrActClass = chrActClass;
-	}
-
 	public void setRace(CharRace race) {
 		this.race = race;
 	}
 
 	public static GameCharacter createRandom(String name, int[] fieldCoordinates) {
-		GameCharacter tempCharacter = new GameCharacter(name, CharRace.Human, 24, fieldCoordinates);
+		GameCharacter tempCharacter = new GameCharacter(name, CharRace.Human,CharClass.Warrior, 24, fieldCoordinates);
 		return tempCharacter;
 	}
 
 	public void removeCharacter() {
 		this.getCurrentField().removeCharakter(this);
 	}
+
+
+	public CharacterAttributes getCharAttr() {
+		return charAttr;
+	}
+
+
+	public void setCharAttr(CharacterAttributes charAttr) {
+		this.charAttr = charAttr;
+	}
+
+
+
 
 }

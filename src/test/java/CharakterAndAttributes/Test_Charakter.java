@@ -19,8 +19,8 @@ public class Test_Charakter extends SuperTest {
 		assertNotNull(character.getCurrentField(), "Char Field == Null");
 		assertNotNull(character.getName(), "Char name == Null");
 		assertNotNull(character.getcClass(), "Char cClass == Null");
-		assertNotNull(character.getChrActClass(), "Char ActionClass == Null");
 
+		//TODO add New
 	}
 
 	@AfterClass
