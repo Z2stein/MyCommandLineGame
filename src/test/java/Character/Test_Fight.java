@@ -1,4 +1,4 @@
-package CharakterAndAttributes;
+package Character;
 
 import org.testng.annotations.Test;
 

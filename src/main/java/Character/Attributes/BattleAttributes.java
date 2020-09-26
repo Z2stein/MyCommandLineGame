@@ -1,4 +1,6 @@
-package Character;
+package Character.Attributes;
+
+import Character.GameCharacter;
 
 public class BattleAttributes {
 	static int basicAttackPoints;

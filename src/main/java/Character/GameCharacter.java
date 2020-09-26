@@ -1,5 +1,9 @@
 package Character;
 
+import java.util.ArrayList;
+
+import Character.Attributes.BattleAttributes;
+import Character.Attributes.CharacterAttributes;
 import Character.Class.CharClass;
 import Character.Class.Warrior;
 import Character.Race.CharRace;
@@ -14,16 +18,21 @@ public class GameCharacter {
 	private int age;
 	private Field currentField;
 
-	protected CharacterAttributes charAttr;
 	
-	protected BattleAttributes battleAttr;
+	
+	private CharacterAttributes charAttr;
+	
+	private BattleAttributes battleAttr;
 
+	private ArrayList<CharAction> charAction;
 	
-	protected CharAction charAction;
+	
 	protected CharRace race;
 	protected CharClass cClass;
 
 	public GameCharacter(String name, CharRace race, CharClass cClass, int age, int[] fieldCoordinates) {
+		this.charAction = new ArrayList<>();
+		
 		this.name = name;
 		this.age = age;
 		this.currentField = (WorldMap.getField(fieldCoordinates));
@@ -51,7 +60,7 @@ public class GameCharacter {
 
 		switch (cClass2) {
 		case Warrior:
-			this.charAction = new Warrior();
+			charAction.add(new Warrior());
 			break;
 
 		default:
@@ -64,10 +73,10 @@ public class GameCharacter {
 
 		switch (charRace) {
 		case Human:
-			this.charAction = new Human(this);
+			charAction.add(new Human());
 			break;
 		case Orc:
-			this.charAction = new Orc(this);
+			charAction.add(new Orc());
 			break;
 
 		default:
@@ -165,6 +174,13 @@ public class GameCharacter {
 	public void setCharAttr(CharacterAttributes charAttr) {
 		this.charAttr = charAttr;
 	}
+
+
+	public ArrayList<CharAction> getCharAction() {
+		return charAction;
+	}
+
+
 
 
 

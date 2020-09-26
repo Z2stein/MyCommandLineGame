@@ -1,4 +1,4 @@
-package CharakterAndAttributes;
+package Character;
 
 import static org.testng.Assert.assertNotNull;
 

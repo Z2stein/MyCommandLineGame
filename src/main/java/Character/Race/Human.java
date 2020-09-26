@@ -16,11 +16,6 @@ public class Human  implements CharAction {
 	}
 	
 	
-	public Human(GameCharacter gameCharacter) {
-		this.gameChar = gameCharacter;
-	}
-
-
 	public int getStrengthmodifier() {
 		return strengthModifier;
 	}

@@ -1,5 +1,7 @@
 package Character;
 
-public interface CharAction  extends CharAttr{
+public interface CharAction {
+	public int getStrengthmodifier();
+	public int getConstitutionmodifier();
 
 }

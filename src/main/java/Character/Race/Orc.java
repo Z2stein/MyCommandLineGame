@@ -14,10 +14,7 @@ public class Orc  implements CharAction {
 		strengthModifier = 5;
 		constitutionModifier = 10;
 	}
-	
-	public Orc(GameCharacter gameCharacter) {
-		this.gameChar = gameCharacter;
-	}
+
 
 	public int getStrengthmodifier() {
 		return strengthModifier;
