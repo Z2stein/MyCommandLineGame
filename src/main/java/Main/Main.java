@@ -1,8 +1,8 @@
 package Main;
 
-import CharakterAndAttributes.GameCharacter;
-import CharakterAndAttributes.Class.CharClass;
-import CharakterAndAttributes.Race.CharRace;
+import Character.GameCharacter;
+import Character.Class.CharClass;
+import Character.Race.CharRace;
 import Quest.Prolog;
 import Support.EzLog;
 import World.WorldMap;

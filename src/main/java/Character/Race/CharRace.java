@@ -1,4 +1,4 @@
-package CharakterAndAttributes.Race;
+package Character.Race;
 
 public enum CharRace {
 	Orc,Human;

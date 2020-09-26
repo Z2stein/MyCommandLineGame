@@ -1,22 +1,18 @@
-package CharakterAndAttributes.Race;
+package Character.Class;
 
-import CharakterAndAttributes.GameCharacter;
+import Character.GameCharacter;
 
-public class Orc implements CharRaceAction {
+public class Warrior implements CharClassAction {
 
-	private GameCharacter gameChar;
 
 	static final private int strengthModifier;
 	static final private int constitutionModifier;
 	
 	static {
-		strengthModifier = 5;
+		strengthModifier = 10;
 		constitutionModifier = 10;
 	}
 	
-	public Orc(GameCharacter gameCharacter) {
-		this.gameChar = gameCharacter;
-	}
 
 	public int getStrengthmodifier() {
 		return strengthModifier;
@@ -25,6 +21,5 @@ public class Orc implements CharRaceAction {
 	public int getConstitutionmodifier() {
 		return constitutionModifier;
 	}
-
 
 }

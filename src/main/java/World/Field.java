@@ -2,7 +2,7 @@ package World;
 
 import java.util.ArrayList;
 
-import CharakterAndAttributes.GameCharacter;
+import Character.GameCharacter;
 import World.Fields.Desert;
 import World.Fields.Forest;
 import World.Fields.Prairie;

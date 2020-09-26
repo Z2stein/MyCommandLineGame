@@ -1,12 +1,12 @@
-package CharakterAndAttributes;
+package Character;
 
-import CharakterAndAttributes.Class.CharClass;
-import CharakterAndAttributes.Class.CharClassAction;
-import CharakterAndAttributes.Class.Warrior;
-import CharakterAndAttributes.Race.CharRace;
-import CharakterAndAttributes.Race.CharRaceAction;
-import CharakterAndAttributes.Race.Human;
-import CharakterAndAttributes.Race.Orc;
+import Character.Class.CharClass;
+import Character.Class.CharClassAction;
+import Character.Class.Warrior;
+import Character.Race.CharRace;
+import Character.Race.CharRaceAction;
+import Character.Race.Human;
+import Character.Race.Orc;
 import Support.FormatingOut;
 import World.Field;
 import World.WorldMap;

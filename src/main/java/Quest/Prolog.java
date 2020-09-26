@@ -1,6 +1,6 @@
 package Quest;
 
-import CharakterAndAttributes.GameCharacter;
+import Character.GameCharacter;
 import Support.EzLog;
 
 public class Prolog {

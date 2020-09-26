@@ -5,9 +5,9 @@ import static org.testng.Assert.assertNotEquals;
 
 import org.testng.annotations.Test;
 
-import CharakterAndAttributes.GameCharacter;
-import CharakterAndAttributes.Class.CharClass;
-import CharakterAndAttributes.Race.CharRace;
+import Character.GameCharacter;
+import Character.Class.CharClass;
+import Character.Race.CharRace;
 import Test.SuperTest;
 
 public class Test_Field extends SuperTest {

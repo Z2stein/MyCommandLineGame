@@ -1,6 +1,6 @@
 package World;
 
-import CharakterAndAttributes.GameCharacter;
+import Character.GameCharacter;
 
 public class Test_CharInteraction {
 	public void recocnisionTest() {

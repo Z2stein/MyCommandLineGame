@@ -8,9 +8,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
-import CharakterAndAttributes.GameCharacter;
-import CharakterAndAttributes.Class.CharClass;
-import CharakterAndAttributes.Race.CharRace;
+import Character.GameCharacter;
+import Character.Class.CharClass;
+import Character.Race.CharRace;
 import Support.EzLog;
 import Support.FormatingOut;
 import World.Field;

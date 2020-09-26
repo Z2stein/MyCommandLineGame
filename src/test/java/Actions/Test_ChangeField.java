@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import CharakterAndAttributes.GameCharacter;
+import Character.GameCharacter;
 import Test.SuperTest;
 
 public class Test_ChangeField extends SuperTest {

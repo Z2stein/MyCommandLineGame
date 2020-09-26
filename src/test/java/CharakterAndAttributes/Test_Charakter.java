@@ -5,6 +5,7 @@ import static org.testng.Assert.assertNotNull;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
+import Character.GameCharacter;
 import Test.SuperTest;
 
 public class Test_Charakter extends SuperTest {

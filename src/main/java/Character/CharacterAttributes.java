@@ -1,4 +1,4 @@
-package CharakterAndAttributes;
+package Character;
 
 public class CharacterAttributes {
 	private int constitution;

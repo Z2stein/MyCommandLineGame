@@ -1,6 +1,6 @@
 package Actions;
 
-import CharakterAndAttributes.GameCharacter;
+import Character.GameCharacter;
 import Main.Main;
 import Support.EzLog;
 import Support.FormatingOut;

@@ -2,6 +2,8 @@ package CharakterAndAttributes;
 
 import org.testng.annotations.Test;
 
+import Character.GameCharacter;
+
 public class Test_Fight {
   @Test
   public void DoAttack() {

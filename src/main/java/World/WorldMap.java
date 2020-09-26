@@ -2,7 +2,7 @@ package World;
 
 import java.util.ArrayList;
 
-import CharakterAndAttributes.GameCharacter;
+import Character.GameCharacter;
 
 public class WorldMap {
 
