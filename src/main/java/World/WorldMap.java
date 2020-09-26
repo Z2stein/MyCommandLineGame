@@ -1,7 +1,8 @@
 package World;
 
+import java.util.ArrayList;
+
 import CharakterAndAttributes.GameCharacter;
-import Support.FormatingOut;
 
 public class WorldMap {
 
@@ -13,27 +14,27 @@ public class WorldMap {
 		grid = new Field[size][size];
 		int chooseInt;
 		int x = 0;
-		int y=0;
-		
+		int y = 0;
+
 		for (int i = 0; i < grid.length; i++) {
-			
+
 			for (int j = 0; j < grid[0].length; j++) {
-				chooseInt = (int) (Math.random() * 4); 
-				int[] coordinates = {x,y};
-				grid[i][j] = Field.createField(chooseInt,coordinates);
-				grid[i][j] .setCoordinates(coordinates);
+				chooseInt = (int) (Math.random() * 4);
+				int[] coordinates = { x, y };
+				grid[i][j] = Field.createField(chooseInt, coordinates);
+				grid[i][j].setCoordinates(coordinates);
 				y++;
 			}
-			y=0;
+			y = 0;
 			x++;
 		}
 	}
-	
-    public static Field getField(int[] targetCoordinates) {
-    	return grid[targetCoordinates[0]][targetCoordinates[1]];
+
+	public static Field getField(int[] targetCoordinates) {
+		return grid[targetCoordinates[0]][targetCoordinates[1]];
 	}
 
-    public static int getWorldDimension() {
+	public static int getWorldDimension() {
 		return worldDimension;
 	}
 
@@ -43,15 +44,9 @@ public class WorldMap {
 
 	public static void createAndSetRandChars(int n) {
 		for (int i = 0; i < n; i++) {
-			int[] randCoord =	{(int) Math.random()*worldDimension,(int) Math.random()*worldDimension};
-			//TODO delete
-			System.out.println("++++"+WorldMap.getNumberOfCharsAtMap());
-			GameCharacter.createRandom("RandomChar"+i, randCoord);
-			grid=grid;
-			//TODO delete
-			System.out.println("++++"+WorldMap.getNumberOfCharsAtMap());
-			
-		} 
+			int[] randCoord = { (int) Math.random() * worldDimension, (int) Math.random() * worldDimension };
+			GameCharacter.createRandom("RandomChar" + i, randCoord);
+		}
 	}
 
 	public static Field[][] getGrid() {
@@ -63,9 +58,10 @@ public class WorldMap {
 		Field[][] grid = WorldMap.getGrid();
 		for (Field[] fields : grid) {
 			for (Field field : fields) {
-				counter += field.getCharaktersAtField().size();
+				ArrayList<GameCharacter> tempChars = field.getCharaktersAtField();
+				counter += tempChars.size();
 			}
-		}	
+		}
 		return counter;
 	}
 }

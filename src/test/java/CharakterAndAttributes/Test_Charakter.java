@@ -6,15 +6,12 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import Test.SuperTest;
-import World.WorldMap;
 
 public class Test_Charakter extends SuperTest {
 	GameCharacter character;
+
 	@Test
 	public void TestCharAttributesNotNull() {
-		//TODO delete
-		System.out.println(WorldMap.getNumberOfCharsAtMap());
-		
 		character = SuperTest.getTestChar();
 
 		assertNotNull(character.getRace(), "CharRace == Null");
@@ -26,8 +23,7 @@ public class Test_Charakter extends SuperTest {
 
 	}
 
-	//TODO enable
-//	@AfterClass
+	@AfterClass
 	public void cleanup() {
 		character.getCurrentField().removeCharakter(character);
 	}

@@ -22,7 +22,7 @@ public class Test_ChangeField extends SuperTest {
 
 	}
 
-	@Test(priority = 101)
+	@Test
 	public void charDirectionToIntArrayTest() {
 		assertEquals(new int[] { 0, 1 }, ChangeField.charDirectionToIntArray("n"));
 		assertEquals(new int[] { 0, 0 }, ChangeField.charDirectionToIntArray("t"));
@@ -35,7 +35,7 @@ public class Test_ChangeField extends SuperTest {
 				{ 0, -3, false }, { 0, 2, true }, { 0, 3, false } };
 	}
 
-	@Test(dataProvider = "getData_checkIfNewCoord", priority = 102)
+	@Test(dataProvider = "getData_checkIfNewCoord")
 	public void checkIfNewCoordinatesValidTest(int x, int y, boolean expected) {
 
 		GameCharacter currentMainCharakter = Main.Main.getCharacter();
@@ -48,7 +48,7 @@ public class Test_ChangeField extends SuperTest {
 
 	}
 
-	@Test(priority = 104)
+	@Test
 	public void moveToTest() throws Exception {
 
 		ChangeField.moveTo("n");

@@ -1,6 +1,7 @@
 package World;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
 
 import org.testng.annotations.Test;
 
@@ -13,19 +14,31 @@ public class Test_Field extends SuperTest {
 	private Field field;
 
 
-	@Test(priority = 101)
+	public void clearupAfterMethode() {
+		
+	}
+	
+	@Test
 	public void addCharakterTest() {
 		field = WorldMap.getField(new int[] { 0, 0 });
 		character = new GameCharacter("TestChar", CharRace.Human,24, new int[] { 0, 0 });
 		assertEquals(field.getCharaktersAtField().size(), 1);
 	}
-
-	@Test(priority = 102)
+	
+	@Test(dependsOnMethods = "addCharakterTest")
+	public void diffCharAtDiffFields() {
+		Field field1 = WorldMap.getField(new int[] { 0, 0 });
+		Field field2 = WorldMap.getField(new int[] { 0, 1 });
+		
+		assertNotEquals(field1.getCharaktersAtField(), field2.getCharaktersAtField(),"Same CharakterArrayList at different Fields");
+	}
+	
+	@Test(dependsOnMethods="diffCharAtDiffFields")
 	public void removeCharakterTest() {
 		field.removeCharakter(character);
 		assertEquals(field.getCharaktersAtField().size(), 0);
 	}
-	@Test(priority= 103)
+	@Test(dependsOnMethods="removeCharakterTest")
 	public void addMultiChar() {
 		int numberOfChars=100;
 		field = WorldMap.getField(new int[] { 0, 0 });
@@ -33,7 +46,6 @@ public class Test_Field extends SuperTest {
 			character = new GameCharacter("TestChar"+i,CharRace.Human, 24, new int[] { 0, 0 });
 		}
 		assertEquals(field.getCharaktersAtField().size(), numberOfChars);
-		
 	}
 
 }

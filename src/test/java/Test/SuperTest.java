@@ -16,7 +16,6 @@ import World.WorldMap;
 
 public class SuperTest {
 
-	// TODO Problem while Executing all test form XML an once
 
 	private static ArrayList<GameCharacter> characters = new ArrayList<>();
 
@@ -34,10 +33,6 @@ public class SuperTest {
 	@BeforeClass
 	public void setupClass() {
 		System.out.println("## Start TestClass:" + FormatingOut.getLastPackage(this.getClass().getName()) + "  ##");
-		
-		//TODO delete
-			System.out.println("There are "+WorldMap.getNumberOfCharsAtMap()+" Charakters Left on Map");
-		
 	}
 
 	@AfterClass
@@ -66,17 +61,9 @@ public class SuperTest {
 
 		if (WorldMap.getNumberOfCharsAtMap() != 0) {
 			Field[][] grid = WorldMap.getGrid();
-			ArrayList<GameCharacter> charaktersAtField = new ArrayList<>();
-
 			for (Field[] fields : grid) {
 				for (Field field : fields) {
-					field.setCharaktersAtField(charaktersAtField);
-					//TODO delete
-					System.out.println(WorldMap.getNumberOfCharsAtMap());
-					//TODO delete
-					if (field.getCharaktersAtField().size()!=0) {
-					System.out.println("Still  "+field.getCharaktersAtField().size()+" char at field");
-					}
+					field.setCharaktersAtField(new ArrayList<>());
 				}
 			}
 			System.out.println("  -  -> Empty world from all Charakters "+WorldMap.getNumberOfCharsAtMap() +" left");

@@ -2,10 +2,13 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
   <test thread-count="5" name="Test">
-    <packages>
-      <package name="Actions"/>
-      <package name="World"/>
-      <package name="CharakterAndAttributes"/>
-    </packages>
+    <classes>
+      <class name="Actions.Test_ChangeField"/>
+      <class name="World.Test_Field"/>
+      <class name="World.Test_Other"/>
+      <class name="CharakterAndAttributes.Test_Charakter"/>
+      <!-- 
+       -->
+    </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
