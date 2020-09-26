@@ -5,8 +5,8 @@ public class CharacterAttributes {
 	private int strength;
 	public CharacterAttributes(GameCharacter character) {
 		super();
-		this.constitution = character.chrRaceAct.getConstitutionmodifier()+character.chrClassAct.getConstitutionmodifier();
-		this.strength = character.chrRaceAct.getStrengthmodifier()+character.chrClassAct.getStrengthmodifier();;
+		this.constitution = character.charAction.getConstitutionmodifier()+character.charAction.getConstitutionmodifier();
+		this.strength = character.charAction.getStrengthmodifier()+character.charAction.getStrengthmodifier();;
 	}
 	public int getConstitution() {
 		return constitution;

@@ -1,10 +1,8 @@
 package Character;
 
 import Character.Class.CharClass;
-import Character.Class.CharClassAction;
 import Character.Class.Warrior;
 import Character.Race.CharRace;
-import Character.Race.CharRaceAction;
 import Character.Race.Human;
 import Character.Race.Orc;
 import Support.FormatingOut;
@@ -21,8 +19,7 @@ public class GameCharacter {
 	protected BattleAttributes battleAttr;
 
 	
-	protected CharRaceAction chrRaceAct;
-	protected CharClassAction chrClassAct;
+	protected CharAction charAction;
 	protected CharRace race;
 	protected CharClass cClass;
 
@@ -54,7 +51,7 @@ public class GameCharacter {
 
 		switch (cClass2) {
 		case Warrior:
-			this.chrClassAct = new Warrior();
+			this.charAction = new Warrior();
 			break;
 
 		default:
@@ -67,10 +64,10 @@ public class GameCharacter {
 
 		switch (charRace) {
 		case Human:
-			this.chrRaceAct = new Human(this);
+			this.charAction = new Human(this);
 			break;
 		case Orc:
-			this.chrRaceAct = new Orc(this);
+			this.charAction = new Orc(this);
 			break;
 
 		default:

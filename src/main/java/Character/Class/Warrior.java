@@ -1,8 +1,8 @@
 package Character.Class;
 
-import Character.GameCharacter;
+import Character.CharAction;
 
-public class Warrior implements CharClassAction {
+public class Warrior implements CharAction {
 
 
 	static final private int strengthModifier;

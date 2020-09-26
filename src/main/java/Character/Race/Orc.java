@@ -1,8 +1,9 @@
 package Character.Race;
 
+import Character.CharAction;
 import Character.GameCharacter;
 
-public class Orc implements CharRaceAction {
+public class Orc  implements CharAction {
 
 	private GameCharacter gameChar;
 
