@@ -1,26 +1,25 @@
 package CharakterAndAttributes.Class;
 
+import CharakterAndAttributes.GameCharacter;
 
 public class Warrior implements CharClassAction {
 
-	static int constitution;
-	static int strenght;
+
+	static final private int strengthModifier;
+	static final private int constitutionModifier;
 	
 	static {
-		constitution = 10;
-		strenght = 7;
+		strengthModifier = 10;
+		constitutionModifier = 10;
 	}
 	
-	@Override
+
 	public int getStrengthmodifier() {
-		// TODO Auto-generated method stub
-		return 0;
+		return strengthModifier;
 	}
 
-	@Override
 	public int getConstitutionmodifier() {
-		// TODO Auto-generated method stub
-		return 0;
+		return constitutionModifier;
 	}
 
 }
