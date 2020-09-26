@@ -10,17 +10,19 @@ import org.testng.annotations.BeforeSuite;
 
 import CharakterAndAttributes.GameCharacter;
 import CharakterAndAttributes.Race.CharRace;
+import Support.EzLog;
 import Support.FormatingOut;
 import World.Field;
 import World.WorldMap;
 
 public class SuperTest {
 
-
 	private static ArrayList<GameCharacter> characters = new ArrayList<>();
 
 	@BeforeSuite
 	public void SetUp() {
+
+		EzLog.setExecutionCaseToTest();
 
 		final int fieldSize = 5;
 
@@ -66,7 +68,7 @@ public class SuperTest {
 					field.setCharaktersAtField(new ArrayList<>());
 				}
 			}
-			System.out.println("  -  -> Empty world from all Charakters "+WorldMap.getNumberOfCharsAtMap() +" left");
+			System.out.println("  -  -> Empty world from all Charakters " + WorldMap.getNumberOfCharsAtMap() + " left");
 		}
 	}
 }
