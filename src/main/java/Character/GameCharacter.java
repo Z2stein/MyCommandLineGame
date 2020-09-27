@@ -9,6 +9,7 @@ import Character.Class.Warrior;
 import Character.Race.CharRace;
 import Character.Race.Human;
 import Character.Race.Orc;
+import Support.EzLog;
 import Support.FormatingOut;
 import World.Field;
 import World.WorldMap;
@@ -50,9 +51,6 @@ public class GameCharacter {
 		
 		battleAttr=new BattleAttributes(this);
 		
-//		this.setAttributes();
-		
-//TODO Battle Attr		
 	}
 
 
@@ -94,10 +92,18 @@ public class GameCharacter {
 	}
 
 	public void doAttack(GameCharacter targetChar) {
+		int modificationPoints = this.battleAttr.getAttackPoints();
+		targetChar.battleAttr.modifyLifePoints(-modificationPoints);
 		
-		
-		
+		if (targetChar.battleAttr.getLifePoints()==0) targetChar.dying();
+
 	}
+
+	private void dying() {
+		EzLog.log(this.name+" is dead!", 1);
+		this.currentField.removeCharakter(this);
+	}
+
 
 	public int[] getCharakterPosition() {
 		return currentField.getCoordinates();
@@ -178,6 +184,16 @@ public class GameCharacter {
 
 	public ArrayList<CharAction> getCharAction() {
 		return charAction;
+	}
+
+
+	public BattleAttributes getBattleAttr() {
+		return battleAttr;
+	}
+
+
+	public void setBattleAttr(BattleAttributes battleAttr) {
+		this.battleAttr = battleAttr;
 	}
 
 

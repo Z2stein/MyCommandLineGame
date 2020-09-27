@@ -30,9 +30,6 @@ public class Test_Field extends SuperTest {
 	
 	@Test(dependsOnMethods = "addCharakterTest")
 	public void diffCharAtDiffFields() {
-		//TODO DElete
-		System.out.println("hallo");
-		
 		Field field1 = WorldMap.getField(new int[] { 0, 0 });
 		assertEquals(field1, field);
 		
