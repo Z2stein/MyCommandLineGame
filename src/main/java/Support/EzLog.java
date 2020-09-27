@@ -10,14 +10,15 @@ import java.util.Scanner;
 public class EzLog {
 	private static Scanner userIn;
 	private static List<String> consolOutputStr;
-	
-	private enum ExecutionCase{
-		NORMAL,
-		TEST;
+
+	private enum ExecutionCase {
+		NORMAL, TEST;
 	}
-	
+
 	private static ExecutionCase executionCase = null;
-	
+	private static int testInArgsCounter;
+	private static String[] testInArguments;
+
 	static {
 		// Scanner for Input For Line
 		userIn = new Scanner(System.in);
@@ -25,13 +26,12 @@ public class EzLog {
 		consolOutputStr = new ArrayList<String>();
 
 		String actualDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
-		log("##############################",  0);
-		log("######  Initalize Loger  #####",  0);
-		log("###  " + actualDateTime + "   ###",  0);
-		log("##############################",  0);
+		log("##############################", 0);
+		log("######  Initalize Loger  #####", 0);
+		log("###  " + actualDateTime + "   ###", 0);
+		log("##############################", 0);
 	}
 
-	
 	public static void log(String massage, char c) {
 		String prefix = "";
 		String surfix = "";
@@ -39,50 +39,61 @@ public class EzLog {
 		switch (c) {
 		case 'a':
 			prefix = "  -  ";
-			surfix=prefix;
+			surfix = prefix;
 			break;
 		case 'e':
-			//exeption
+			// exeption
 			prefix = " !-  ";
-			surfix="  -  ";
+			surfix = "  -  ";
 			break;
 		case '!':
-			//exeption
+			// exeption
 			prefix = " !!!!!!!-  ";
-			surfix="  -!!!!!!!  ";
+			surfix = "  -!!!!!!!  ";
 			break;
 
 		default:
 			break;
 		}
-        
-		writeout(prefix+massage+surfix);
-		
-		writeout(prefix+massage+surfix);
-		
-		if(c=='e') return;
+
+		writeout(prefix + massage + surfix);
+
+		if (c == 'e')
+			return;
 		try {
-			FileLogger.writeToExistingFile(prefix+massage+surfix);
+			FileLogger.writeToExistingFile(prefix + massage + surfix);
 		} catch (IOException e) {
 			writeout("Error in FileLogger: Was not ABle to Log to FIle ");
 			e.printStackTrace();
-		}	
-		
+		}
+
 	}
 
 	private static void writeout(String string) {
-		if (executionCase==ExecutionCase.NORMAL) {
+		if (executionCase == ExecutionCase.NORMAL) {
 			System.out.println(string);
 		}
-		if (executionCase==ExecutionCase.TEST) {
+		if (executionCase == ExecutionCase.TEST) {
 			consolOutputStr.add(string);
 		}
 	}
 
 	public static String in(String question) {
-		String preAndSurFix = " -- ";
-		writeout(preAndSurFix + question + preAndSurFix);
-		return userIn.nextLine();
+
+		if (executionCase == ExecutionCase.NORMAL) {
+
+			String preAndSurFix = " -- ";
+			writeout(preAndSurFix + question + preAndSurFix);
+			return userIn.nextLine();
+		} else if (executionCase == ExecutionCase.TEST) {
+			String preAndSurFix = " -- ";
+			writeout(preAndSurFix + question + preAndSurFix);
+			
+			String  currenInput = testInArguments[testInArgsCounter];
+			
+			return currenInput;
+		}
+		return null;
 	}
 
 	public static void help(String str1, String str2) {
@@ -92,7 +103,6 @@ public class EzLog {
 	}
 
 	public static void log(String massage, int n) {
-
 
 		String prefix = "";
 
@@ -110,7 +120,7 @@ public class EzLog {
 		} catch (IOException e) {
 			writeout("Error in FileLogger: Was not ABle to Log to FIle ");
 			e.printStackTrace();
-		}		
+		}
 	}
 
 	public static ExecutionCase getExecutionCase() {
@@ -120,7 +130,17 @@ public class EzLog {
 	public static void setExecutionCaseToTest() {
 		EzLog.executionCase = ExecutionCase.TEST;
 	}
+
 	public static String getLastConsoleOutput() {
-		return consolOutputStr.get(consolOutputStr.size()-1);
+		return getLastConsoleOutput(0);
+	}
+	public static String getLastConsoleOutput(int linesBefore) {
+		return consolOutputStr.get(consolOutputStr.size() - 1 -linesBefore);
+	}
+	public static void setTestInArgsCounter(int testInArgsCounter) {
+		EzLog.testInArgsCounter = testInArgsCounter;
+	}
+	public static void setTestInArguments(String[] testInArguments) {
+		EzLog.testInArguments = testInArguments;
 	}
 }

@@ -3,47 +3,61 @@ package Main;
 import Character.GameCharacter;
 import Character.Class.CharClass;
 import Character.Race.CharRace;
-import Quest.Prolog;
 import Support.EzLog;
 import World.WorldMap;
 
 public class Main {
 
-	private static Prolog quest;
 
 	private static int fieldSize = 5;
-	private static int numbRandCharakters = 10;
 
 	private static GameCharacter character;
 
 	public static void main(String[] args) throws Exception {
 		WorldMap.createWorld(fieldSize);
-		WorldMap.createAndSetRandChars(numbRandCharakters);
 
+		character = createPlayserCharacter();
+
+		while (true) {
+			GameRound.nextRound();
+		}
+	}
+
+	private static GameCharacter createPlayserCharacter() {
 		int[] charCoordinates = { (int) fieldSize / 2, (int) fieldSize / 2 };
+		boolean validEntries = false;
 
 		String name = EzLog.in("What is your Name");
 
 		int age = Integer.parseInt(EzLog.in("How old are you?"));
 
-		CharRace race = CharRace.valueOf(EzLog.in("What is Your Race?"));
-
-		character = (new GameCharacter(name, race,CharClass.Warrior, age, charCoordinates));
-
-		character.getAllInfo();
-
-		quest = new Quest.Prolog(character);
-		quest.startNewStory();
-		String input;
-		while (true) {
-			input = EzLog.in("What Do You wanna Do?").toLowerCase();
-
-			if (input.equals("exit") || input.equals("quit") || input.equals("exitgame")) {
-				break;
+//get Race From Player
+		CharRace race = null;
+		while (!validEntries) {
+			try {
+				race = CharRace.valueOf(EzLog.in("What is Your Race?").toUpperCase());
+				validEntries = true;
+			} catch (IllegalArgumentException e) {
+				EzLog.log("This is not a Valid Race", 'e');
 			}
-
-			Actions.Basics.doAction(input);
 		}
+
+// get Class from Player
+		validEntries = false;
+		CharClass cClass = null;
+		while (!validEntries) {
+			try {
+				cClass = CharClass.valueOf(EzLog.in("What is Your Class?").toUpperCase());
+				validEntries = true;
+			} catch (IllegalArgumentException e) {
+				EzLog.log("This is not a Valid Class", 'e');
+			}
+		}
+
+		character = (new GameCharacter(name, race, cClass, age, charCoordinates));
+		character.getAllInfo();
+		character.setBot(false);
+		return character;
 	}
 
 	public static GameCharacter getCharacter() {

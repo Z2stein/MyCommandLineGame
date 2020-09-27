@@ -11,7 +11,7 @@ public class Basics {
 		setHelpHashMap();
 	}
 
-	public static void doAction(String ActionString) throws Exception {
+	public static void doAction(String ActionString){
 		String[] splittedStr = splitStrings(ActionString);
 
 		switch (splittedStr[0]) {

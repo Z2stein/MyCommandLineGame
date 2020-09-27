@@ -11,6 +11,7 @@
       <class name="Actions.Test_Help"/>
       <class name="Character.Test_Charakter"/>
       <class name="World.Test_Field"/>
+      <class name="Main.Test_System"></class>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

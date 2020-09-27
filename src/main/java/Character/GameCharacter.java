@@ -26,7 +26,8 @@ public class GameCharacter {
 	private String name;
 	private int age;
 	private Field currentField;
-
+	private boolean isBot;
+	
 	private CharacterAttributes charAttr;
 	private BattleAttributes battleAttr;
 	private ArrayList<CharAction> charAction;
@@ -35,6 +36,8 @@ public class GameCharacter {
 	protected CharClass cClass;
 
 	public GameCharacter(String name, CharRace race, CharClass cClass, int age, int[] fieldCoordinates) {
+		setBot(true);
+		
 		allCharacters.add(this);
 
 		this.charAction = new ArrayList<>();
@@ -61,7 +64,7 @@ public class GameCharacter {
 	private void setClassAction(CharClass cClass2) {
 
 		switch (cClass2) {
-		case Warrior:
+		case WARRIOR:
 			charAction.add(new Warrior());
 			break;
 
@@ -73,10 +76,10 @@ public class GameCharacter {
 	private void setRaceClass(CharRace charRace) {
 
 		switch (charRace) {
-		case Human:
+		case HUMAN:
 			charAction.add(new Human());
 			break;
-		case Orc:
+		case ORC:
 			charAction.add(new Orc());
 			break;
 
@@ -89,7 +92,7 @@ public class GameCharacter {
 	public void getAllInfo() {
 
 		String strRace = race.name();
-		String strClass = FormatingOut.getLastPackage(cClass.getClass().getName());
+		String strClass = cClass.name();
 
 		System.out.println("You are " + name + ", a " + age + " year old " + strRace + ". Your Class is " + strClass);
 	}
@@ -167,7 +170,7 @@ public class GameCharacter {
 	}
 
 	public static GameCharacter createRandom(String name, int[] fieldCoordinates) {
-		GameCharacter tempCharacter = new GameCharacter(name, CharRace.Human, CharClass.Warrior, 24, fieldCoordinates);
+		GameCharacter tempCharacter = new GameCharacter(name, CharRace.HUMAN, CharClass.WARRIOR, 24, fieldCoordinates);
 		return tempCharacter;
 	}
 
@@ -202,6 +205,14 @@ public class GameCharacter {
 
 	public static ArrayList<GameCharacter> getAllCharacters() {
 		return allCharacters;
+	}
+
+	public boolean isBot() {
+		return isBot;
+	}
+
+	public void setBot(boolean isBot) {
+		this.isBot = isBot;
 	}
 
 }

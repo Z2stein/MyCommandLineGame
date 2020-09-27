@@ -26,7 +26,7 @@ public class Test_Field extends SuperTest {
 	@Test
 	public void addCharakterTest() {
 		field = WorldMap.getField(new int[] { 0, 0 });
-		character = new GameCharacter("TestChar", CharRace.Human, CharClass.Warrior, 24, new int[] { 0, 0 });
+		character = new GameCharacter("TestChar", CharRace.HUMAN, CharClass.WARRIOR, 24, new int[] { 0, 0 });
 		assertEquals(field.getCharaktersAtField().size(), 1);
 	}
 
@@ -52,7 +52,7 @@ public class Test_Field extends SuperTest {
 		int numberOfChars = 100;
 		field = WorldMap.getField(new int[] { 0, 0 });
 		for (int i = 0; i < numberOfChars; i++) {
-			character = new GameCharacter("TestChar" + i, CharRace.Human, CharClass.Warrior, 24, new int[] { 0, 0 });
+			character = new GameCharacter("TestChar" + i, CharRace.HUMAN, CharClass.WARRIOR, 24, new int[] { 0, 0 });
 		}
 		assertEquals(field.getCharaktersAtField().size(), numberOfChars);
 	}

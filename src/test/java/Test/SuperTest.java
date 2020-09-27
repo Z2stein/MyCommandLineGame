@@ -49,7 +49,7 @@ public class SuperTest {
 	}
 
 	public static GameCharacter getTestChar() {
-		GameCharacter character = new GameCharacter("TestChar", CharRace.Human,CharClass.Warrior ,24, new int[] { 2, 2 });
+		GameCharacter character = new GameCharacter("TestChar", CharRace.HUMAN,CharClass.WARRIOR ,24, new int[] { 2, 2 });
 		characters.add(character);
 		return character;
 	}

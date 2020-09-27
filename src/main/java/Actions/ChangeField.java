@@ -8,7 +8,7 @@ import World.WorldMap;
 
 public class ChangeField {
 
-	public static void moveTo(String direction) throws Exception {
+	public static void moveTo(String direction){
 
 		int[] deltaCoord = charDirectionToIntArray(direction);
 
@@ -20,7 +20,7 @@ public class ChangeField {
 			EzLog.log("Your current position is "+currChar.getCharakterPositionStr(), 'a');
 			
 		} else {
-			EzLog.log("You tried to exeed the map, but you are not able to", 'e');
+			EzLog.log("You tried to exceed the map, but you are not able to", 'e');
 			EzLog.log("Your current position is "+currChar.getCharakterPositionStr(), 'e');
 		}
 		
