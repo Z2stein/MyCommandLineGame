@@ -80,7 +80,7 @@ public class ChangeField {
 			break;
 
 		default:
-			EzLog.log("UnValid moveto direction use n,s,w or e", 'e');
+			EzLog.log("Invalid moveto direction use n,s,w or e", 'e');
 		}
 		return fieldDelta;
 	}

@@ -8,8 +8,9 @@ import org.testng.annotations.Test;
 import Character.GameCharacter;
 import Support.EzLog;
 import Test.SuperTest;
+import Test.TestOutput;
 
-public class Test_System extends SuperTest {
+public class Test_System extends SuperTest implements TestOutput{
   @Test
   public void exceedingTheMapf() {
 	  GameCharacter character = GameCharacter.createRandom();
@@ -29,9 +30,6 @@ public class Test_System extends SuperTest {
 		  GameRound.nextRound();
 	  }
 	  
-	  String actual = EzLog.getLastConsoleOutput(1);
-	  
-	  String expect = "tried to exceed";
-	  assertTrue(actual.contains(expect),"The actual Console Output '"+actual+"' does not Contain: "+expect);
+	  checkIfTextInConsole(3, new String[] {"exceed","Map","tried"});
   }
 }
