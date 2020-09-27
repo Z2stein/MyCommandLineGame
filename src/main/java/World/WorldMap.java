@@ -1,16 +1,26 @@
 package World;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import Character.GameCharacter;
+import World.Fields.Cemetery;
 
 public class WorldMap {
 
 	static private Field[][] grid;
 	static private int worldDimension;
+	private static Cemetery cemetery;
 
-	static public void createWorldGrid(int size) {
+	static public void createWorld(int size) {
 		worldDimension = size;
+		
+		createWorldGrid(size);
+		
+		
+	}
+
+	private static void createWorldGrid(int size) {
 		grid = new Field[size][size];
 		int chooseInt;
 		int x = 0;
@@ -27,7 +37,9 @@ public class WorldMap {
 			}
 			y = 0;
 			x++;
-		}
+		}	
+		
+		cemetery = new Cemetery();
 	}
 
 	public static Field getField(int[] targetCoordinates) {
@@ -55,7 +67,6 @@ public class WorldMap {
 
 	public static int getNumberOfCharsAtMap() {
 		int counter = 0;
-		Field[][] grid = WorldMap.getGrid();
 		for (Field[] fields : grid) {
 			for (Field field : fields) {
 				ArrayList<GameCharacter> tempChars = field.getCharaktersAtField();
@@ -63,5 +74,8 @@ public class WorldMap {
 			}
 		}
 		return counter;
+	}
+	public static Cemetery getCemetery() {
+		return cemetery;
 	}
 }

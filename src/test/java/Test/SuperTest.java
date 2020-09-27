@@ -27,7 +27,7 @@ public class SuperTest {
 
 		final int fieldSize = 5;
 
-		WorldMap.createWorldGrid(fieldSize);
+		WorldMap.createWorld(fieldSize);
 
 		System.out
 				.println("#####################################\n############################### Suite Setup Finished");

@@ -1,6 +1,7 @@
 package Character;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import Character.Attributes.BattleAttributes;
 import Character.Attributes.CharacterAttributes;
@@ -15,44 +16,47 @@ import World.Field;
 import World.WorldMap;
 
 public class GameCharacter {
+
+	static private ArrayList<GameCharacter> allCharacters;
+
+	static {
+		allCharacters = new ArrayList<GameCharacter>();
+	}
+
 	private String name;
 	private int age;
 	private Field currentField;
 
-	
-	
 	private CharacterAttributes charAttr;
-	
 	private BattleAttributes battleAttr;
-
 	private ArrayList<CharAction> charAction;
-	
-	
+
 	protected CharRace race;
 	protected CharClass cClass;
 
 	public GameCharacter(String name, CharRace race, CharClass cClass, int age, int[] fieldCoordinates) {
+		allCharacters.add(this);
+
 		this.charAction = new ArrayList<>();
-		
+
 		this.name = name;
 		this.age = age;
 		this.currentField = (WorldMap.getField(fieldCoordinates));
 		this.currentField.addCharakter(this);
-		
-		//Set Race
-		this.race = race; //enum
-		this.setRaceClass(race); //actionClass
-		
+
+		// Set Race
+		this.race = race; // enum
+		this.setRaceClass(race); // actionClass
+
 		// Set Class
 		this.cClass = cClass;
 		this.setClassAction(cClass);
-		
-		charAttr=new CharacterAttributes(this);
-		
-		battleAttr=new BattleAttributes(this);
-		
-	}
 
+		charAttr = new CharacterAttributes(this);
+
+		battleAttr = new BattleAttributes(this);
+
+	}
 
 	private void setClassAction(CharClass cClass2) {
 
@@ -65,7 +69,6 @@ public class GameCharacter {
 			break;
 		}
 	}
-
 
 	private void setRaceClass(CharRace charRace) {
 
@@ -94,16 +97,17 @@ public class GameCharacter {
 	public void doAttack(GameCharacter targetChar) {
 		int modificationPoints = this.battleAttr.getAttackPoints();
 		targetChar.battleAttr.modifyLifePoints(-modificationPoints);
-		
-		if (targetChar.battleAttr.getLifePoints()==0) targetChar.dying();
+
+		if (targetChar.battleAttr.getLifePoints() == 0)
+			targetChar.dying();
 
 	}
 
 	private void dying() {
-		EzLog.log(this.name+" is dead!", 1);
+		EzLog.log(this.name + " is dead!", 1);
 		this.currentField.removeCharakter(this);
+		this.currentField = WorldMap.getCemetery();
 	}
-
 
 	public int[] getCharakterPosition() {
 		return currentField.getCoordinates();
@@ -163,42 +167,41 @@ public class GameCharacter {
 	}
 
 	public static GameCharacter createRandom(String name, int[] fieldCoordinates) {
-		GameCharacter tempCharacter = new GameCharacter(name, CharRace.Human,CharClass.Warrior, 24, fieldCoordinates);
+		GameCharacter tempCharacter = new GameCharacter(name, CharRace.Human, CharClass.Warrior, 24, fieldCoordinates);
 		return tempCharacter;
+	}
+
+	public static GameCharacter createRandom() {
+		return createRandom("TestChar", new int[] { 2, 2 });
 	}
 
 	public void removeCharacter() {
 		this.getCurrentField().removeCharakter(this);
+		allCharacters.remove(this);
 	}
-
 
 	public CharacterAttributes getCharAttr() {
 		return charAttr;
 	}
 
-
 	public void setCharAttr(CharacterAttributes charAttr) {
 		this.charAttr = charAttr;
 	}
-
 
 	public ArrayList<CharAction> getCharAction() {
 		return charAction;
 	}
 
-
 	public BattleAttributes getBattleAttr() {
 		return battleAttr;
 	}
-
 
 	public void setBattleAttr(BattleAttributes battleAttr) {
 		this.battleAttr = battleAttr;
 	}
 
-
-
-
-
+	public static ArrayList<GameCharacter> getAllCharacters() {
+		return allCharacters;
+	}
 
 }

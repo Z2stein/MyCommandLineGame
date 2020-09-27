@@ -17,7 +17,7 @@ public class Main {
 	private static GameCharacter character;
 
 	public static void main(String[] args) throws Exception {
-		WorldMap.createWorldGrid(fieldSize);
+		WorldMap.createWorld(fieldSize);
 		WorldMap.createAndSetRandChars(numbRandCharakters);
 
 		int[] charCoordinates = { (int) fieldSize / 2, (int) fieldSize / 2 };
