@@ -12,6 +12,7 @@
       <class name="Character.Test_Charakter"/>
       <class name="World.Test_Field"/>
       <class name="Main.Test_System"></class>
+      <class name="Character.Test_RageTo"></class>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

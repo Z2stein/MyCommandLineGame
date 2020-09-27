@@ -10,6 +10,7 @@ import Character.Class.Warrior;
 import Character.Race.CharRace;
 import Character.Race.Human;
 import Character.Race.Orc;
+import Character.RageTo.RageAction;
 import Support.EzLog;
 import Support.FormatingOut;
 import World.Field;
@@ -27,21 +28,23 @@ public class GameCharacter {
 	private int age;
 	private Field currentField;
 	private boolean isBot;
-	
+
 	private CharacterAttributes charAttr;
 	private BattleAttributes battleAttr;
 	private ArrayList<CharAction> charAction;
 
 	protected CharRace race;
 	protected CharClass cClass;
+	private HashMap<GameCharacter, RageTo> rageTo;
 
 	public GameCharacter(String name, CharRace race, CharClass cClass, int age, int[] fieldCoordinates) {
 		setBot(true);
-		
+
 		allCharacters.add(this);
 
 		this.charAction = new ArrayList<>();
-
+		this.rageTo =  new HashMap<>();
+		
 		this.name = name;
 		this.age = age;
 		this.currentField = (WorldMap.getField(fieldCoordinates));
@@ -70,6 +73,15 @@ public class GameCharacter {
 
 		default:
 			break;
+
+		}
+	}
+
+	public void rageToChar(GameCharacter rageTarget, RageAction rageAction) {
+		if (rageTo.containsKey(rageTarget)) {
+			rageTo.get(rageTarget).increaseRage(rageAction.getRageValue());
+		} else {
+			rageTo.put(rageTarget, new RageTo(this, rageTarget));
 		}
 	}
 
@@ -101,6 +113,8 @@ public class GameCharacter {
 		int modificationPoints = this.battleAttr.getAttackPoints();
 		targetChar.battleAttr.modifyLifePoints(-modificationPoints);
 
+		targetChar.rageToChar(this, RageAction.ATTACK);
+		
 		if (targetChar.battleAttr.getLifePoints() == 0)
 			targetChar.dying();
 
@@ -215,4 +229,7 @@ public class GameCharacter {
 		this.isBot = isBot;
 	}
 
+	public HashMap<GameCharacter, RageTo> getRageTo() {
+		return rageTo;
+	}
 }

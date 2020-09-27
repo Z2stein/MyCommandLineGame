@@ -6,14 +6,13 @@ import static org.testng.Assert.assertTrue;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.testng.annotations.Test;
 
-import Character.GameCharacter;
 import Support.EzLog;
 import Test.SuperTest;
 import World.WorldMap;
 
 public class Test_Fight extends SuperTest {
+
 
 	GameCharacter currChar, targetChar;
 
