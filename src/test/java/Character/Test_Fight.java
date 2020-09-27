@@ -1,10 +1,12 @@
 package Character;
 
 import org.testng.annotations.Test;
+import org.testng.annotations.Test;
 
 import Character.GameCharacter;
+import Test.SuperTest;
 
-public class Test_Fight {
+public class Test_Fight extends SuperTest {
   @Test
   public void DoAttack() {
 	  

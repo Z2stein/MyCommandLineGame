@@ -4,6 +4,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
 
+
 import org.testng.annotations.Test;
 
 import Character.GameCharacter;
@@ -29,11 +30,14 @@ public class Test_Field extends SuperTest {
 	
 	@Test(dependsOnMethods = "addCharakterTest")
 	public void diffCharAtDiffFields() {
+		//TODO DElete
+		System.out.println("hallo");
+		
 		Field field1 = WorldMap.getField(new int[] { 0, 0 });
 		assertEquals(field1, field);
 		
 		Field field2 = WorldMap.getField(new int[] { 0, 1 });
-		assertFalse(field1.getCharaktersAtField().size()==0,"No Charakter @ Fileds");
+	assertFalse(field1.getCharaktersAtField().size()==0,"No Charakter @ Fileds");
 		assertNotEquals(field1.getCharaktersAtField(), field2.getCharaktersAtField(),"Same CharakterArrayList at different Fields");
 	}
 	

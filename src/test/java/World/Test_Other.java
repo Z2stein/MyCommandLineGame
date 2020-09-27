@@ -1,8 +1,8 @@
 package World;
 
+import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
-import org.testng.annotations.Test;
 
 import Test.SuperTest;
 
