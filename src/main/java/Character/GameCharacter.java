@@ -43,8 +43,8 @@ public class GameCharacter {
 		allCharacters.add(this);
 
 		this.charAction = new ArrayList<>();
-		this.rageTo =  new HashMap<>();
-		
+		this.rageTo = new HashMap<>();
+
 		this.name = name;
 		this.age = age;
 		this.currentField = (WorldMap.getField(fieldCoordinates));
@@ -77,12 +77,18 @@ public class GameCharacter {
 		}
 	}
 
+	
+	/**
+	 * 
+	 * @param rageTarget the Char which is the target of the Race (e.g. the attacker)
+	 * @param rageAction
+	 */
 	public void rageToChar(GameCharacter rageTarget, RageAction rageAction) {
-		if (rageTo.containsKey(rageTarget)) {
-			rageTo.get(rageTarget).increaseRage(rageAction.getRageValue());
-		} else {
+		if (!rageTo.containsKey(rageTarget)) {
 			rageTo.put(rageTarget, new RageTo(this, rageTarget));
 		}
+		int rageActionValue = rageAction.getRageValue();
+		rageTo.get(rageTarget).increaseRage(rageActionValue);
 	}
 
 	private void setRaceClass(CharRace charRace) {
@@ -114,7 +120,7 @@ public class GameCharacter {
 		targetChar.battleAttr.modifyLifePoints(-modificationPoints);
 
 		targetChar.rageToChar(this, RageAction.ATTACK);
-		
+
 		if (targetChar.battleAttr.getLifePoints() == 0)
 			targetChar.dying();
 
@@ -232,4 +238,8 @@ public class GameCharacter {
 	public HashMap<GameCharacter, RageTo> getRageTo() {
 		return rageTo;
 	}
+
+	public void nextRound() {
+		rageTo.values().stream().forEach(s->s.decreaseRoundBased());
+		}
 }

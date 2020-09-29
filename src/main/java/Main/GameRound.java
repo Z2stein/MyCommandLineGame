@@ -1,6 +1,8 @@
 package Main;
 
+import Character.GameCharacter;
 import Support.EzLog;
+import World.WorldMap;
 
 public class GameRound {
 	public static void nextRound() {
@@ -18,9 +20,10 @@ public class GameRound {
 		Actions.Basics.doAction(input);
 	}
 
-	private static void doBotRound() {
-		// TODO Auto-generated method stub
-		
+	public static void doBotRound() {
+		for (GameCharacter character:GameCharacter.getAllCharacters()) {
+			character.nextRound();
+		}
 	}
 
 	private static void doWorldRound() {

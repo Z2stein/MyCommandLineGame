@@ -8,7 +8,7 @@ public class BattleAttributes {
 
 	static {
 		basicAttackPoints = 1;
-		basicLifePoints = 5;
+		basicLifePoints = 15;
 
 	}
 
@@ -23,7 +23,7 @@ public class BattleAttributes {
 
 	public BattleAttributes(GameCharacter character) {
 		super();
-		this.lifePoints = character.getCharAttr().getConstitution() / 2;
+		this.lifePoints = character.getCharAttr().getConstitution() ;
 		this.attackPoints = character.getCharAttr().getStrength() / 2;
 
 	}
