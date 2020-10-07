@@ -1,45 +1,67 @@
 package Character.Attributes;
 
-import Character.CharAction;
 import Character.GameCharacter;
 
 public class CharacterAttributes {
-	static private int	initalConstitution,	initalStrength;
-	
+	final static private int initalStrength;
+	static final int initalConstitution;
+	private static final int initalDexterity;
+	private static final int initalIntelligence;
+	private static final int initalWisdom;
+	private static final int initalCharisma;
+	private int strength, constitution, dexterity, intelligence, wisdom, charisma;
+
 	static {
+		initalStrength = 0;
 		initalConstitution = 0;
-		initalStrength =0;
+		initalDexterity = 0;
+		initalIntelligence = 0;
+		initalWisdom = 0;
+		initalCharisma = 0;
 	}
-	
-	private int constitution;
-	private int strength;
-	public CharacterAttributes(GameCharacter character) {
-		super();
-		constitution = initalConstitution;
-		strength = initalStrength;
-		
-		for(CharAction charAction:character.getCharAction()) {
-			this.constitution += charAction.getConstitutionmodifier();
-			this.strength += charAction.getStrengthmodifier();
-		}
+
+	public int getStrength() {
+		return strength;
 	}
 	public int getConstitution() {
 		return constitution;
 	}
-	public int getStrength() {
-		return strength;
+	public int getDexterity() {
+		return dexterity;
 	}
-	public void setConstitution(int constitution) {
-		this.constitution = constitution;
+	public int getIntelligence() {
+		return intelligence;
 	}
-	public void setStrength(int strength) {
-		this.strength = strength;
+	public int getWisdom() {
+		return wisdom;
 	}
-	
-	public static int getInitalConstitution() {
-		return initalConstitution;
+	public int getCharisma() {
+		return charisma;
 	}
-	public static int getInitalStrength() {
-		return initalStrength;
+
+	public CharacterAttributes(GameCharacter character) {
+		super();
+		strength = initalStrength;
+		constitution = initalConstitution;
+		dexterity = initalDexterity;
+		intelligence = initalIntelligence;
+		wisdom = initalWisdom;
+		charisma = initalCharisma;
+
+		strength += character.race.strengthModifier;
+		constitution += character.race.constitutionModifier;
+		dexterity += character.race.dexterityModifier;
+		intelligence += character.race.intelligenceModifier;
+		wisdom += character.race.wisdomModifier;
+		charisma += character.race.charismaModifier;
+
+		strength += character.cClass.strengthModifier;
+		constitution += character.cClass.constitutionModifier;
+		dexterity += character.cClass.dexterityModifier;
+		intelligence += character.cClass.intelligenceModifier;
+		wisdom += character.cClass.wisdomModifier;
+		charisma += character.cClass.charismaModifier;
+
 	}
+
 }

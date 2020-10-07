@@ -13,9 +13,9 @@ public class TestAttributes extends SuperTest {
 	  GameCharacter character =
 	  GameCharacter.createRandom("TestCharacter", new int[] {2,2});
 	  
-	  int expected = CharacterAttributes.getInitalConstitution()+character.getCharAction().get(0).getConstitutionmodifier() +  character.getCharAction().get(1).getConstitutionmodifier();
+	  int expected = CharacterAttributes.initalConstitution+character.race.constitutionModifier +  character.cClass.constitutionModifier;
   
-	  int actual = character.getCharAttr().getConstitution();
+	  int actual = character.charAttr.getConstitution();
 	  
 	  
 	  assertEquals(actual, expected);

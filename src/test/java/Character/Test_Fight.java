@@ -4,6 +4,9 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import javax.swing.RepaintManager;
+
+import org.testng.Reporter;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -28,26 +31,28 @@ public class Test_Fight extends SuperTest {
 		int expectedLifeP;
 		int expectedAttack;
 
-		expectedAttack = currChar.getBattleAttr().getAttackPoints();
+		expectedAttack = currChar.battleAttr.getAttackPoints();
 
-		expectedLifeP = targetChar.getBattleAttr().getLifePoints();
+		expectedLifeP = targetChar.battleAttr.getLifePoints();
 
 		currChar.doAttack(targetChar);
 
-		int actual = targetChar.getBattleAttr().getLifePoints();
+		int actual = targetChar.battleAttr.getLifePoints();
 
 		assertEquals(actual, expectedLifeP - expectedAttack);
+		Reporter.log("Testcase Ended with "+actual+" LifePoints");
 	}
 
 	@Test
 	public void killChar() {
 		for (int i = 0; i < 20; i++) {
 			currChar.doAttack(targetChar);
-			if (targetChar.getBattleAttr().getLifePoints() == 0)
-				break;
+//			TODO Delete
+			int is = targetChar.battleAttr.getLifePoints();
+			if (targetChar.battleAttr.getLifePoints() == 0)	break;
 		}
 
-		assertEquals(targetChar.getBattleAttr().getLifePoints(), 0, "LifePoints by Killing:");
+		assertEquals(targetChar.battleAttr.getLifePoints(), 0, "LifePoints by Killing:");
 		String expected = "is dead";
 		assertTrue(EzLog.getLastConsoleOutput().contains(expected), "The Output Massage is not like expected");
 

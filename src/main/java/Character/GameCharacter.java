@@ -3,16 +3,12 @@ package Character;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import Character.RageTo.RageAction;
 import Character.Attributes.BattleAttributes;
 import Character.Attributes.CharacterAttributes;
 import Character.Class.CharClass;
-import Character.Class.Warrior;
 import Character.Race.CharRace;
-import Character.Race.Human;
-import Character.Race.Orc;
-import Character.RageTo.RageAction;
 import Support.EzLog;
-import Support.FormatingOut;
 import World.Field;
 import World.WorldMap;
 
@@ -24,17 +20,16 @@ public class GameCharacter {
 		allCharacters = new ArrayList<GameCharacter>();
 	}
 
-	private String name;
+	final private String name;
 	private int age;
 	private Field currentField;
 	private boolean isBot;
 
-	private CharacterAttributes charAttr;
-	private BattleAttributes battleAttr;
-	private ArrayList<CharAction> charAction;
+	public final CharacterAttributes charAttr;
+	final BattleAttributes battleAttr;
 
-	protected CharRace race;
-	protected CharClass cClass;
+	final public CharRace race;
+	final public CharClass cClass;
 	private HashMap<GameCharacter, RageTo> rageTo;
 
 	public GameCharacter(String name, CharRace race, CharClass cClass, int age, int[] fieldCoordinates) {
@@ -42,7 +37,6 @@ public class GameCharacter {
 
 		allCharacters.add(this);
 
-		this.charAction = new ArrayList<>();
 		this.rageTo = new HashMap<>();
 
 		this.name = name;
@@ -52,11 +46,9 @@ public class GameCharacter {
 
 		// Set Race
 		this.race = race; // enum
-		this.setRaceClass(race); // actionClass
 
 		// Set Class
 		this.cClass = cClass;
-		this.setClassAction(cClass);
 
 		charAttr = new CharacterAttributes(this);
 
@@ -64,20 +56,6 @@ public class GameCharacter {
 
 	}
 
-	private void setClassAction(CharClass cClass2) {
-
-		switch (cClass2) {
-		case WARRIOR:
-			charAction.add(new Warrior());
-			break;
-
-		default:
-			break;
-
-		}
-	}
-
-	
 	/**
 	 * 
 	 * @param rageTarget the Char which is the target of the Race (e.g. the attacker)
@@ -89,22 +67,6 @@ public class GameCharacter {
 		}
 		int rageActionValue = rageAction.getRageValue();
 		rageTo.get(rageTarget).increaseRage(rageActionValue);
-	}
-
-	private void setRaceClass(CharRace charRace) {
-
-		switch (charRace) {
-		case HUMAN:
-			charAction.add(new Human());
-			break;
-		case ORC:
-			charAction.add(new Orc());
-			break;
-
-		default:
-			break;
-		}
-
 	}
 
 	public void getAllInfo() {
@@ -157,36 +119,12 @@ public class GameCharacter {
 		setCurrentField(newField);
 	}
 
-	public String getName() {
-		return name;
-	}
-
 	public int getAge() {
 		return age;
 	}
 
-	public CharClass getcClass() {
-		return cClass;
-	}
-
-	public CharRace getRace() {
-		return race;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public void setAge(int age) {
 		this.age = age;
-	}
-
-	public void setcClass(CharClass cClass) {
-		this.cClass = cClass;
-	}
-
-	public void setRace(CharRace race) {
-		this.race = race;
 	}
 
 	public static GameCharacter createRandom(String name, int[] fieldCoordinates) {
@@ -203,25 +141,6 @@ public class GameCharacter {
 		allCharacters.remove(this);
 	}
 
-	public CharacterAttributes getCharAttr() {
-		return charAttr;
-	}
-
-	public void setCharAttr(CharacterAttributes charAttr) {
-		this.charAttr = charAttr;
-	}
-
-	public ArrayList<CharAction> getCharAction() {
-		return charAction;
-	}
-
-	public BattleAttributes getBattleAttr() {
-		return battleAttr;
-	}
-
-	public void setBattleAttr(BattleAttributes battleAttr) {
-		this.battleAttr = battleAttr;
-	}
 
 	public static ArrayList<GameCharacter> getAllCharacters() {
 		return allCharacters;

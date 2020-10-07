@@ -23,9 +23,12 @@ public class BattleAttributes {
 
 	public BattleAttributes(GameCharacter character) {
 		super();
-		this.lifePoints = character.getCharAttr().getConstitution() ;
-		this.attackPoints = character.getCharAttr().getStrength() / 2;
-
+		this.lifePoints = 2*(character.charAttr.getConstitution()+5) ;
+		this.attackPoints = (character.charAttr.getStrength() / 2+character.charAttr.getDexterity())+1;
+		
+		if (attackPoints<1) this.attackPoints =1;
+		if (lifePoints<1) this.lifePoints =1;
+		
 	}
 
 	public int getAttackPoints() {

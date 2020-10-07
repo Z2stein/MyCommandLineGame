@@ -1,8 +1,8 @@
 package Main;
 
+import Actions.BasicActions;
 import Character.GameCharacter;
 import Support.EzLog;
-import World.WorldMap;
 
 public class GameRound {
 	public static void nextRound() {
@@ -17,7 +17,7 @@ public class GameRound {
 			System.exit(0);
 		}
 		
-		Actions.Basics.doAction(input);
+		BasicActions.doAction(input);
 	}
 
 	public static void doBotRound() {

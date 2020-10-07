@@ -14,11 +14,9 @@ public class Test_Charakter extends SuperTest {
 	public void TestCharAttributesNotNull() {
 		character = SuperTest.getTestChar();
 
-	assertNotNull(character.getRace(), "CharRace == Null");
+	assertNotNull(character.race, "CharRace == Null");
 		assertNotNull(character.getAge(), "Char Age == Null");
 		assertNotNull(character.getCurrentField(), "Char Field == Null");
-		assertNotNull(character.getName(), "Char name == Null");
-		assertNotNull(character.getcClass(), "Char cClass == Null");
 
 		//TODO add New
 	}
