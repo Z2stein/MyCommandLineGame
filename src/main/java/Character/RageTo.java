@@ -18,12 +18,14 @@ public class RageTo {
 	}
 
 	final static private int maxRage;
+	final static private int criticalAttackRage;
 
 	private GameCharacter rageOwner, rageTarget;
 	private int rageValue;
 
 	static {
-		maxRage = 50;
+		maxRage = Main.Settings.Fight.MAXRAGE.getValue();
+		criticalAttackRage=Main.Settings.Fight.CRITICAL_ATTACK_RAGE.getValue();
 	}
 
 	public RageTo(GameCharacter rageOwner, GameCharacter rageTarget) {
@@ -49,5 +51,8 @@ public class RageTo {
 		int modification = ((int)(rageValue*0.1+0.5));
 		if(modification<1) modification=1;
 		rageValue-= modification;
+	}
+	public static int getCriticalattackrage() {
+		return criticalAttackRage;
 	}
 }

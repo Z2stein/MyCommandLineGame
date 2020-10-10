@@ -14,7 +14,7 @@ import Support.MsgType;
 import World.Field;
 import World.WorldMap;
 
-public class GameCharacter extends DoAction{
+public class GameCharacter extends DoAction {
 
 	static private ArrayList<GameCharacter> allCharacters;
 
@@ -70,7 +70,7 @@ public class GameCharacter extends DoAction{
 	public HashMap<GameCharacter, RageTo> getRageTo() {
 		return rageTo;
 	}
-	
+
 	public void getAllInfo() {
 
 		String strRace = race.name();
@@ -139,8 +139,25 @@ public class GameCharacter extends DoAction{
 		this.getCurrentField().removeCharakter(this);
 		allCharacters.remove(this);
 	}
+
 	public void nextRound() {
-		rageTo.values().stream().forEach(s -> s.decreaseRoundBased());
+
+		// Rage
+		GameCharacter targenCharacter = null;
+		for (GameCharacter rageTarget : rageTo.keySet()) {
+			if (targenCharacter == null)
+				targenCharacter = rageTarget;
+
+			RageTo currentRage = rageTo.get(rageTarget);
+
+			if (rageTo.get(targenCharacter).getRageValue() < currentRage.getRageValue())
+
+				currentRage.decreaseRoundBased();
+		}
+
+		if (rageTo.get(targenCharacter).getRageValue() >= RageTo.getCriticalattackrage())
+			this.doAttack(targenCharacter);
+
 	}
 
 	public void doAttack(GameCharacter targetChar) {
@@ -152,7 +169,7 @@ public class GameCharacter extends DoAction{
 
 		if (targetChar.battleAttr.getLifePoints() == 0)
 			targetChar.dying();
-		
+
 	}
 
 	private void dying() {

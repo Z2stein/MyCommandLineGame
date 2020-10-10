@@ -16,7 +16,6 @@ import World.WorldMap;
 
 public class Test_Fight extends SuperTest {
 
-
 	GameCharacter currChar, targetChar;
 
 	@BeforeClass
@@ -28,8 +27,7 @@ public class Test_Fight extends SuperTest {
 
 	@Test
 	public void doAttack() {
-		int expectedLifeP;
-		int expectedAttack;
+		int expectedLifeP, expectedAttack;
 
 		expectedAttack = currChar.battleAttr.getAttackPoints();
 
@@ -40,16 +38,34 @@ public class Test_Fight extends SuperTest {
 		int actual = targetChar.battleAttr.getLifePoints();
 
 		assertEquals(actual, expectedLifeP - expectedAttack);
-		Reporter.log("Testcase Ended with "+actual+" LifePoints");
+		Reporter.log("Testcase Ended with " + actual + " LifePoints");
 	}
 
-	@Test
+	@Test(dependsOnMethods = "doAttack")
+	public void counterAttack() {
+		int expectedLifeP, expectedAttack;
+		
+		expectedAttack = targetChar.battleAttr.getAttackPoints();
+
+		expectedLifeP = currChar.battleAttr.getLifePoints();
+		
+		Main.GameRound.doBotRound();
+
+		int actual = currChar.battleAttr.getLifePoints();
+
+		assertEquals(actual, expectedLifeP - expectedAttack);
+
+
+	}
+
+	@Test(dependsOnMethods = "counterAttack")
 	public void killChar() {
 		for (int i = 0; i < 20; i++) {
 			currChar.doAttack(targetChar);
 //			TODO Delete
 			int is = targetChar.battleAttr.getLifePoints();
-			if (targetChar.battleAttr.getLifePoints() == 0)	break;
+			if (targetChar.battleAttr.getLifePoints() == 0)
+				break;
 		}
 
 		assertEquals(targetChar.battleAttr.getLifePoints(), 0, "LifePoints by Killing:");
