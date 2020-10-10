@@ -4,6 +4,7 @@ import Character.GameCharacter;
 import Character.Class.CharClass;
 import Character.Race.CharRace;
 import Support.EzLog;
+import Support.MsgType;
 import World.WorldMap;
 
 public class Main {
@@ -38,7 +39,7 @@ public class Main {
 				race = CharRace.valueOf(EzLog.in("What is Your Race?").toUpperCase());
 				validEntries = true;
 			} catch (IllegalArgumentException e) {
-				EzLog.log("This is not a Valid Race", 'e');
+				EzLog.log("This is not a Valid Race", MsgType.INGAME_EXEPTION);
 			}
 		}
 
@@ -50,7 +51,7 @@ public class Main {
 				cClass = CharClass.valueOf(EzLog.in("What is Your Class?").toUpperCase());
 				validEntries = true;
 			} catch (IllegalArgumentException e) {
-				EzLog.log("This is not a Valid Class", 'e');
+				EzLog.log("This is not a Valid Class",  MsgType.INGAME_EXEPTION);
 			}
 		}
 

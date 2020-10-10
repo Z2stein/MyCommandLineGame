@@ -1,6 +1,5 @@
 package Main;
 
-import Actions.BasicActions;
 import Character.GameCharacter;
 import Support.EzLog;
 
@@ -12,12 +11,11 @@ public class GameRound {
 	}
 
 	private static void doPlayerRound() {
-		String input = EzLog.in("What Do You wanna Do?").toLowerCase();
+		String input = EzLog.in("What Do You wanna Do?");
 		if (input.equals("exit") || input.equals("quit") || input.equals("exitgame")) {
 			System.exit(0);
 		}
-		
-		BasicActions.doAction(input);
+		Main.getCharacter().doAction(input);
 	}
 
 	public static void doBotRound() {

@@ -2,6 +2,7 @@ package Quest;
 
 import Character.GameCharacter;
 import Support.EzLog;
+import Support.MsgType;
 
 public class Prolog {
 	
@@ -13,7 +14,7 @@ public class Prolog {
 
 	private static void ak1_unknown() {
 		
-		EzLog.log("you wake up. It's dark, night. No sound. You feel the grass tickling you.",1);
+		EzLog.log("you wake up. It's dark, night. No sound. You feel the grass tickling you.",MsgType.INFO_AREA);
 		
 	}
 

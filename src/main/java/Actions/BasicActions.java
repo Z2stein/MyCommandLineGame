@@ -3,6 +3,7 @@ package Actions;
 import java.util.Arrays;
 
 import Support.EzLog;
+import Support.MsgType;
 
 public enum BasicActions {
 
@@ -27,7 +28,7 @@ public enum BasicActions {
 	}
 
 	public void perform() {
-		EzLog.log("You Connot Do this Action", 'e');
+		EzLog.log("You Connot Do this Action", MsgType.INGAME_EXEPTION);
 	}
 
 	public static void help(String action) {
@@ -39,39 +40,4 @@ public enum BasicActions {
 	public static void help() {
 		Arrays.stream(BasicActions.values()).forEach(s -> EzLog.help(s.name, s.help));
 	}
-	
-	public static void doAction(String ActionString){
-		String[] splittedStr = splitStrings(ActionString);
-
-		
-		
-		switch (splittedStr[0]) {
-		case "help":
-			if (splittedStr[1] == "") {
-				BasicActions.help();
-			} else {
-				BasicActions.help(splittedStr[1]);
-			}
-			break;
-		case "moveto":
-			ChangeField.moveTo(splittedStr[1]);
-			break;
-		default:
-			System.out.println("unknown command, try 'help' to see all valid arguments");
-			break;
-		}
-	}
-
-	private static String[] splitStrings(String actionString) {
-		String[] resultString = { actionString, "" };
-
-		if (actionString.indexOf(' ') == -1) {
-			return resultString;
-		}
-
-		resultString[0] = actionString.substring(0, actionString.indexOf(' '));
-		resultString[1] = actionString.substring(actionString.indexOf(' ') + 1);
-		return resultString;
-	}
-
 }

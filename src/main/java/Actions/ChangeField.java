@@ -4,6 +4,7 @@ import Character.GameCharacter;
 import Main.Main;
 import Support.EzLog;
 import Support.FormatingOut;
+import Support.MsgType;
 import World.WorldMap;
 
 public class ChangeField {
@@ -16,12 +17,12 @@ public class ChangeField {
 		if (moveTo(currChar, deltaCoord)) {
 			String fieldType = FormatingOut.getLastPackage(WorldMap.getField(currChar.getCharakterPosition()).getClass().getName());
 			
-			EzLog.log("You moved in Direction '"+direction+"' and arrived at a new Area. Its a "+fieldType, 'a');
-			EzLog.log("Your current position is "+currChar.getCharakterPositionStr(), 'a');
+			EzLog.log("You moved in Direction '"+direction+"' and arrived at a new Area. Its a "+fieldType, MsgType.ANSWER);
+			EzLog.log("Your current position is "+currChar.getCharakterPositionStr(), MsgType.ANSWER);
 			
 		} else {
-			EzLog.log("You tried to exceed the map, but you are not able to", 'e');
-			EzLog.log("Your current position is "+currChar.getCharakterPositionStr(), 'e');
+			EzLog.log("You tried to exceed the map, but you are not able to", MsgType.INGAME_EXEPTION);
+			EzLog.log("Your current position is "+currChar.getCharakterPositionStr(), MsgType.INGAME_EXEPTION);
 		}
 		
  
@@ -80,7 +81,7 @@ public class ChangeField {
 			break;
 
 		default:
-			EzLog.log("Invalid moveto direction use n,s,w or e", 'e');
+			EzLog.log("Invalid moveto direction use n,s,w or e", MsgType.INGAME_EXEPTION);
 		}
 		return fieldDelta;
 	}

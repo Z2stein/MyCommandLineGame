@@ -3,16 +3,18 @@ package Character;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import Actions.DoAction;
 import Character.RageTo.RageAction;
 import Character.Attributes.BattleAttributes;
 import Character.Attributes.CharacterAttributes;
 import Character.Class.CharClass;
 import Character.Race.CharRace;
 import Support.EzLog;
+import Support.MsgType;
 import World.Field;
 import World.WorldMap;
 
-public class GameCharacter {
+public class GameCharacter extends DoAction{
 
 	static private ArrayList<GameCharacter> allCharacters;
 
@@ -44,10 +46,7 @@ public class GameCharacter {
 		this.currentField = (WorldMap.getField(fieldCoordinates));
 		this.currentField.addCharakter(this);
 
-		// Set Race
-		this.race = race; // enum
-
-		// Set Class
+		this.race = race;
 		this.cClass = cClass;
 
 		charAttr = new CharacterAttributes(this);
@@ -56,42 +55,28 @@ public class GameCharacter {
 
 	}
 
-	/**
-	 * 
-	 * @param rageTarget the Char which is the target of the Race (e.g. the attacker)
-	 * @param rageAction
-	 */
-	public void rageToChar(GameCharacter rageTarget, RageAction rageAction) {
-		if (!rageTo.containsKey(rageTarget)) {
-			rageTo.put(rageTarget, new RageTo(this, rageTarget));
-		}
-		int rageActionValue = rageAction.getRageValue();
-		rageTo.get(rageTarget).increaseRage(rageActionValue);
+	public static ArrayList<GameCharacter> getAllCharacters() {
+		return allCharacters;
 	}
 
+	public boolean isBot() {
+		return isBot;
+	}
+
+	public void setBot(boolean isBot) {
+		this.isBot = isBot;
+	}
+
+	public HashMap<GameCharacter, RageTo> getRageTo() {
+		return rageTo;
+	}
+	
 	public void getAllInfo() {
 
 		String strRace = race.name();
 		String strClass = cClass.name();
 
 		System.out.println("You are " + name + ", a " + age + " year old " + strRace + ". Your Class is " + strClass);
-	}
-
-	public void doAttack(GameCharacter targetChar) {
-		int modificationPoints = this.battleAttr.getAttackPoints();
-		targetChar.battleAttr.modifyLifePoints(-modificationPoints);
-
-		targetChar.rageToChar(this, RageAction.ATTACK);
-
-		if (targetChar.battleAttr.getLifePoints() == 0)
-			targetChar.dying();
-
-	}
-
-	private void dying() {
-		EzLog.log(this.name + " is dead!", 1);
-		this.currentField.removeCharakter(this);
-		this.currentField = WorldMap.getCemetery();
 	}
 
 	public int[] getCharakterPosition() {
@@ -119,6 +104,20 @@ public class GameCharacter {
 		setCurrentField(newField);
 	}
 
+	/**
+	 * 
+	 * @param rageTarget the Char which is the target of the Race (e.g. the
+	 *                   attacker)
+	 * @param rageAction
+	 */
+	public void rageToChar(GameCharacter rageTarget, RageAction rageAction) {
+		if (!rageTo.containsKey(rageTarget)) {
+			rageTo.put(rageTarget, new RageTo(this, rageTarget));
+		}
+		int rageActionValue = rageAction.getRageValue();
+		rageTo.get(rageTarget).increaseRage(rageActionValue);
+	}
+
 	public int getAge() {
 		return age;
 	}
@@ -140,25 +139,26 @@ public class GameCharacter {
 		this.getCurrentField().removeCharakter(this);
 		allCharacters.remove(this);
 	}
-
-
-	public static ArrayList<GameCharacter> getAllCharacters() {
-		return allCharacters;
-	}
-
-	public boolean isBot() {
-		return isBot;
-	}
-
-	public void setBot(boolean isBot) {
-		this.isBot = isBot;
-	}
-
-	public HashMap<GameCharacter, RageTo> getRageTo() {
-		return rageTo;
-	}
-
 	public void nextRound() {
-		rageTo.values().stream().forEach(s->s.decreaseRoundBased());
-		}
+		rageTo.values().stream().forEach(s -> s.decreaseRoundBased());
+	}
+
+	public void doAttack(GameCharacter targetChar) {
+
+		int modificationPoints = this.battleAttr.getAttackPoints();
+		targetChar.battleAttr.modifyLifePoints(-modificationPoints);
+
+		targetChar.rageToChar(this, RageAction.ATTACK);
+
+		if (targetChar.battleAttr.getLifePoints() == 0)
+			targetChar.dying();
+		
+	}
+
+	private void dying() {
+		EzLog.log(this.name + " is dead!", MsgType.DONE_ACTION);
+		this.currentField.removeCharakter(this);
+		this.currentField = WorldMap.getCemetery();
+	}
+
 }

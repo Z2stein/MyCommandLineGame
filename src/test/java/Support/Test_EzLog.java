@@ -5,10 +5,11 @@ import static org.testng.Assert.assertEquals;
 
 
 public class Test_EzLog {
-  @Test
+
+@Test
   public void testLogging() {
   String actual = "TestLogMassage";
-  EzLog.log(actual, 0);
+  EzLog.log(actual, MsgType.UNFORMATTED);
   String expected = EzLog.getLastConsoleOutput();  
  
   assertEquals(actual, expected);

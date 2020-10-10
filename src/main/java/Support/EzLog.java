@@ -26,42 +26,20 @@ public class EzLog {
 		consolOutputStr = new ArrayList<String>();
 
 		String actualDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
-		log("##############################", 0);
-		log("######  Initalize Loger  #####", 0);
-		log("###  " + actualDateTime + "   ###", 0);
-		log("##############################", 0);
+		writeout("##############################");
+		writeout("######  Initalize Loger  #####");
+		writeout("###  " + actualDateTime + "   ###");
+		writeout("##############################");
 	}
 
-	public static void log(String massage, char c) {
-		String prefix = "";
-		String surfix = "";
+	public static void log(String massage, MsgType msgType) {
 
-		switch (c) {
-		case 'a':
-			prefix = "  -  ";
-			surfix = prefix;
-			break;
-		case 'e':
-			// exeption
-			prefix = " !-  ";
-			surfix = "  -  ";
-			break;
-		case '!':
-			// exeption
-			prefix = " !!!!!!!-  ";
-			surfix = "  -!!!!!!!  ";
-			break;
-
-		default:
-			break;
-		}
-
-		writeout(prefix + massage + surfix);
-
-		if (c == 'e')
+		writeout(msgType.getPrefix() + massage + msgType.getSurfix());
+		if (msgType == MsgType.HARD_EXEPTION)
 			return;
+
 		try {
-			FileLogger.writeToExistingFile(prefix + massage + surfix);
+			FileLogger.writeToExistingFile(msgType.getPrefix() + massage + msgType.getSurfix());
 		} catch (IOException e) {
 			writeout("Error in FileLogger: Was not ABle to Log to FIle ");
 			e.printStackTrace();
@@ -84,14 +62,14 @@ public class EzLog {
 
 			String preAndSurFix = " -- ";
 			writeout(preAndSurFix + question + preAndSurFix);
-			return userIn.nextLine();
+			return userIn.nextLine().toLowerCase();
 		} else if (executionCase == ExecutionCase.TEST) {
 			String preAndSurFix = " -- ";
 			writeout(preAndSurFix + question + preAndSurFix);
-			
-			String  currenInput = testInArguments[testInArgsCounter];
-			
-			return currenInput;
+
+			String currenInput = testInArguments[testInArgsCounter];
+
+			return currenInput.toLowerCase();
 		}
 		return null;
 	}
@@ -100,27 +78,6 @@ public class EzLog {
 		String resStr = "-------------------------------------";
 		resStr = str1 + " " + resStr.substring(str1.length()) + " " + str2;
 		writeout("# " + resStr);
-	}
-
-	public static void log(String massage, int n) {
-
-		String prefix = "";
-
-		if (n != 0) {
-			prefix = "###";
-			for (int i = 1; i < n + 1; i++) {
-				prefix = prefix + "--";
-			}
-			prefix = prefix + "->  ";
-		}
-
-		writeout(prefix + massage);
-		try {
-			FileLogger.writeToExistingFile(prefix + massage);
-		} catch (IOException e) {
-			writeout("Error in FileLogger: Was not ABle to Log to FIle ");
-			e.printStackTrace();
-		}
 	}
 
 	public static ExecutionCase getExecutionCase() {
@@ -134,12 +91,15 @@ public class EzLog {
 	public static String getLastConsoleOutput() {
 		return getLastConsoleOutput(0);
 	}
+
 	public static String getLastConsoleOutput(int linesBefore) {
-		return consolOutputStr.get(consolOutputStr.size() - 1 -linesBefore);
+		return consolOutputStr.get(consolOutputStr.size() - 1 - linesBefore);
 	}
+
 	public static void setTestInArgsCounter(int testInArgsCounter) {
 		EzLog.testInArgsCounter = testInArgsCounter;
 	}
+
 	public static void setTestInArguments(String[] testInArguments) {
 		EzLog.testInArguments = testInArguments;
 	}
