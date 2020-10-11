@@ -19,7 +19,7 @@ public class GameCharacter extends DoAction {
 	static private ArrayList<GameCharacter> allCharacters;
 
 	static {
-		allCharacters = new ArrayList<GameCharacter>();
+		setAllCharacters(new ArrayList<GameCharacter>());
 	}
 
 	final private String name;
@@ -37,7 +37,7 @@ public class GameCharacter extends DoAction {
 	public GameCharacter(String name, CharRace race, CharClass cClass, int age, int[] fieldCoordinates) {
 		setBot(true);
 
-		allCharacters.add(this);
+		getAllCharacters().add(this);
 
 		this.rageTo = new HashMap<>();
 
@@ -58,6 +58,7 @@ public class GameCharacter extends DoAction {
 	public static ArrayList<GameCharacter> getAllCharacters() {
 		return allCharacters;
 	}
+	
 
 	public boolean isBot() {
 		return isBot;
@@ -65,6 +66,10 @@ public class GameCharacter extends DoAction {
 
 	public void setBot(boolean isBot) {
 		this.isBot = isBot;
+	}
+
+	public static void setAllCharacters(ArrayList<GameCharacter> allCharacters) {
+		GameCharacter.allCharacters = allCharacters;
 	}
 
 	public HashMap<GameCharacter, RageTo> getRageTo() {
@@ -137,26 +142,29 @@ public class GameCharacter extends DoAction {
 
 	public void removeCharacter() {
 		this.getCurrentField().removeCharakter(this);
-		allCharacters.remove(this);
+		getAllCharacters().remove(this);
 	}
 
 	public void nextRound() {
 
 		// Rage
-		GameCharacter targenCharacter = null;
+		GameCharacter resultingTargenCharacter = null;
 		for (GameCharacter rageTarget : rageTo.keySet()) {
-			if (targenCharacter == null)
-				targenCharacter = rageTarget;
+			if (resultingTargenCharacter == null)
+				resultingTargenCharacter = rageTarget;
 
 			RageTo currentRage = rageTo.get(rageTarget);
 
-			if (rageTo.get(targenCharacter).getRageValue() < currentRage.getRageValue())
-
-				currentRage.decreaseRoundBased();
+			if (rageTo.get(resultingTargenCharacter).getRageValue() < currentRage.getRageValue()) 
+				resultingTargenCharacter=currentRage.getRageTarget();
 		}
-
-		if (rageTo.get(targenCharacter).getRageValue() >= RageTo.getCriticalattackrage())
-			this.doAttack(targenCharacter);
+		
+		
+		if (resultingTargenCharacter == null) return;
+		if (rageTo.get(resultingTargenCharacter).getRageValue() >= RageTo.getCriticalattackrage())
+			this.doAttack(resultingTargenCharacter);
+		
+		rageTo.keySet().stream().forEach(s->rageTo.get(s).decreaseRoundBased());
 
 	}
 

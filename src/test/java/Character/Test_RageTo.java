@@ -31,6 +31,8 @@ public class Test_RageTo extends SuperTest {
 		GameCharacter attackerChar = GameCharacter.createRandom();
 		GameCharacter targetChar = GameCharacter.createRandom();
 
+		attackerChar.battleAttr.setLifePoints(100);
+		targetChar.battleAttr.setLifePoints(100);
 		attackerChar.doAttack(targetChar);
 		attackerChar.doAttack(targetChar);
 		attackerChar.doAttack(targetChar);
@@ -40,8 +42,7 @@ public class Test_RageTo extends SuperTest {
 		for (int expected : expecteds) {
 			int actual = targetChar.getRageTo().get(attackerChar).getRageValue();
 			assertEquals(actual, expected,"This Rage at Round " + i + " is not like The Expected");
-//			System.out.println(i+" "+actual);
-			GameRound.doBotRound();
+			targetChar.getRageTo().get(attackerChar).decreaseRoundBased();
 			i++;
 		}
 		int actual = targetChar.getRageTo().get(attackerChar).getRageValue();

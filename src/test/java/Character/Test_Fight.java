@@ -62,8 +62,6 @@ public class Test_Fight extends SuperTest {
 	public void killChar() {
 		for (int i = 0; i < 20; i++) {
 			currChar.doAttack(targetChar);
-//			TODO Delete
-			int is = targetChar.battleAttr.getLifePoints();
 			if (targetChar.battleAttr.getLifePoints() == 0)
 				break;
 		}

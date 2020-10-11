@@ -10,7 +10,7 @@ public class GameRound {
 		doPlayerRound();
 	}
 
-	private static void doPlayerRound() {
+	public static void doPlayerRound() {
 		String input = EzLog.in("What Do You wanna Do?");
 		if (input.equals("exit") || input.equals("quit") || input.equals("exitgame")) {
 			System.exit(0);

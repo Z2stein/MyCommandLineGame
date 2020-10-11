@@ -27,6 +27,12 @@ public class RageTo {
 		maxRage = Main.Settings.Fight.MAXRAGE.getValue();
 		criticalAttackRage=Main.Settings.Fight.CRITICAL_ATTACK_RAGE.getValue();
 	}
+	public GameCharacter getRageTarget() {
+		return rageTarget;
+	}
+	public GameCharacter getRageOwner() {
+		return rageOwner;
+	}
 
 	public RageTo(GameCharacter rageOwner, GameCharacter rageTarget) {
 		super();

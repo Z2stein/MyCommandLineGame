@@ -71,5 +71,9 @@ public class SuperTest {
 			}
 			System.out.println("  -  -> Empty world from all Charakters " + WorldMap.getNumberOfCharsAtMap() + " left");
 		}
+		if (GameCharacter.getAllCharacters().size()!=0) {
+			GameCharacter.setAllCharacters(new ArrayList<>());
+			System.out.println("  -  -> Empty GameCHaracters Arraylist from all Charakters " + WorldMap.getNumberOfCharsAtMap() + " left");
+		}
 	}
 }
