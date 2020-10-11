@@ -3,12 +3,17 @@ package Character.Attributes;
 import Character.GameCharacter;
 
 public class BattleAttributes {
-	static int basicAttackPoints;
-	static int basicLifePoints;
+
+	private static final int LifeFromConstFactor;
+	private static final int LifeFixedAddition;
+	private static final int LifeMinInital;
 
 	static {
-		basicAttackPoints = 1;
-		basicLifePoints = 15;
+		LifeFromConstFactor = Main.Settings.BattleAttributes.LIFE_FROM_CONST_FACTOR.getValue();
+		LifeFixedAddition = Main.Settings.BattleAttributes.LIFE_FIXED_ADDITION.getValue();
+		LifeMinInital = Main.Settings.BattleAttributes.MIN_INIT_LIFE.getValue();
+		
+		
 
 	}
 
@@ -23,11 +28,11 @@ public class BattleAttributes {
 
 	public BattleAttributes(GameCharacter character) {
 		super();
-		this.lifePoints = 2*(character.charAttr.getConstitution()+5) ;
+		this.lifePoints = LifeFromConstFactor*(character.charAttr.getConstitution())+LifeFixedAddition ;
 		this.attackPoints = (character.charAttr.getStrength() / 2+character.charAttr.getDexterity())+1;
 		
 		if (attackPoints<1) this.attackPoints =1;
-		if (lifePoints<1) this.lifePoints =1;
+		if (lifePoints<LifeMinInital) this.lifePoints = LifeMinInital;
 		
 	}
 

@@ -28,7 +28,7 @@ public class GameCharacter extends DoAction {
 	private boolean isBot;
 
 	public final CharacterAttributes charAttr;
-	final BattleAttributes battleAttr;
+	final public BattleAttributes battleAttr;
 
 	final public CharRace race;
 	final public CharClass cClass;

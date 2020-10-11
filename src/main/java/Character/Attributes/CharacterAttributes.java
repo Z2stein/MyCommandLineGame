@@ -12,12 +12,12 @@ public class CharacterAttributes {
 	private int strength, constitution, dexterity, intelligence, wisdom, charisma;
 
 	static {
-		initalStrength = 0;
-		initalConstitution = 0;
-		initalDexterity = 0;
-		initalIntelligence = 0;
-		initalWisdom = 0;
-		initalCharisma = 0;
+		initalStrength = Main.Settings.Attributes.INITIAL_STRENGTH.getValue();
+		initalConstitution = Main.Settings.Attributes.INITIAL_CONSTITUTION.getValue();
+		initalDexterity = Main.Settings.Attributes.INITIAL_DEXTERITY.getValue();
+		initalIntelligence = Main.Settings.Attributes.INITIAL_INTELLIGENCE.getValue();
+		initalWisdom = Main.Settings.Attributes.INITIAL_WISDOM.getValue();
+		initalCharisma = Main.Settings.Attributes.INITIAL_CHARISMA.getValue();
 	}
 
 	public int getStrength() {
