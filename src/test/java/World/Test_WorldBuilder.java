@@ -10,7 +10,7 @@ public class Test_WorldBuilder {
 	
 	@Test
 	public void buildWorld() {
-		(new WorldMapBuilder()).setDropRadius(2).setNumbOfDrops(80).setWorldDimension(20).build();
+		(new WorldMapBuilder()).setWorldDimension(5).setDropRadius(2).setNumbOfDrops(80).build();
 		assertFalse(true);
 	}
 }

@@ -3,20 +3,54 @@ package World;
 import java.util.ArrayList;
 
 import Character.GameCharacter;
-import World.Fields.Desert;
-import World.Fields.Forest;
-import World.Fields.Prairie;
-import World.Fields.Swamp;
 
-public abstract class Field {
+public class Field {
 
-	protected ArrayList<GameCharacter> charaktersAtField;
-	protected int movementExhausting;
-	protected int[] coordinates;
-
-	public int getMovementExhausting() {
-		return movementExhausting;
+//	############################################################
+//	##############  Private Variables   ########################
+	ArrayList<GameCharacter> charaktersAtField;
+	private int[] coordinates;
+	private FieldType fieldType;
+	
+	
+	
+//	############################################################
+//	##############  Constructor         ########################
+	
+	
+	public Field(int[] coordinates, FieldType fieldType) {
+		super();
+		this.coordinates = coordinates;
+		this.fieldType = fieldType;
+		this.charaktersAtField = new ArrayList<>();
 	}
+	
+	
+	
+//	############################################################
+//	##############  Methods             ########################
+
+	
+	
+	
+	
+	
+	
+
+
+
+
+	public void addCharakter(GameCharacter gameCharacter) {
+		this.charaktersAtField.add(gameCharacter);
+	}
+
+	public void removeCharakter(GameCharacter gameCharacter) {
+		charaktersAtField.remove(gameCharacter);
+	}
+	
+//	############################################################
+//	##############  Getters and Setters  #######################
+	
 
 	public int[] getCoordinates() {
 		return coordinates;
@@ -26,30 +60,6 @@ public abstract class Field {
 		this.coordinates = coordinates;
 	}
 
-	static public Field createField(int chooseInt, int[] fieldCoordinates) {
-
-
-		switch (chooseInt) {
-		case 0:
-			return new Desert(fieldCoordinates);
-		case 1:
-			return new Forest(fieldCoordinates);
-		case 2:
-			return new Swamp(fieldCoordinates);
-		case 3:
-			return new Prairie(fieldCoordinates);
-		default:
-			return null;
-		}
-	}
-
-	public void addCharakter(GameCharacter gameCharacter) {
-		this.charaktersAtField.add(gameCharacter);
-	}
-
-	public void removeCharakter(GameCharacter gameCharacter) {
-		charaktersAtField.remove(gameCharacter);
-	}
 
 	public ArrayList<GameCharacter> getCharaktersAtField() {
 		return charaktersAtField;

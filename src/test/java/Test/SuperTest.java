@@ -15,6 +15,7 @@ import Support.EzLog;
 import Support.FormatingOut;
 import World.Field;
 import World.WorldMap;
+import World.WorldMapBuilder;
 
 public class SuperTest {
 
@@ -27,7 +28,7 @@ public class SuperTest {
 
 		final int fieldSize = 5;
 
-		WorldMap.createWorld(fieldSize);
+		(new WorldMapBuilder()).setWorldDimension(fieldSize).setDropRadius(1).setNumbOfDrops(2).build();
 
 		System.out
 				.println("#####################################\n############################### Suite Setup Finished");
@@ -49,7 +50,8 @@ public class SuperTest {
 	}
 
 	public static GameCharacter getTestChar() {
-		GameCharacter character = new GameCharacter("TestChar", CharRace.HUMAN,CharClass.WARRIOR ,24, new int[] { 2, 2 });
+		GameCharacter character = new GameCharacter("TestChar", CharRace.HUMAN, CharClass.WARRIOR, 24,
+				new int[] { 2, 2 });
 		characters.add(character);
 		return character;
 	}
@@ -71,9 +73,10 @@ public class SuperTest {
 			}
 			System.out.println("  -  -> Empty world from all Charakters " + WorldMap.getNumberOfCharsAtMap() + " left");
 		}
-		if (GameCharacter.getAllCharacters().size()!=0) {
+		if (GameCharacter.getAllCharacters().size() != 0) {
 			GameCharacter.setAllCharacters(new ArrayList<>());
-			System.out.println("  -  -> Empty GameCHaracters Arraylist from all Charakters " + WorldMap.getNumberOfCharsAtMap() + " left");
+			System.out.println("  -  -> Empty GameCHaracters Arraylist from all Charakters "
+					+ WorldMap.getNumberOfCharsAtMap() + " left");
 		}
 	}
 }

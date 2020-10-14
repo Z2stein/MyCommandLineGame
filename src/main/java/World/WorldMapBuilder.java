@@ -2,35 +2,46 @@ package World;
 
 import java.util.Arrays;
 
-public class WorldMapBuilder {
+public class WorldMapBuilder extends WorldMap {
 
-	static private int[] worldDimension;
 	static private int dropRadius;
 	static private int numbOfDrops;
 	static private double[][] doubleValueGrid;
 	static private int[][] intValueGrid;
 
-	public WorldMapBuilder build() {
+	public void build() {
 		initalizeValueGrid();
 		rain();
-		 printOutGrid(intValueGrid);
-
-		return this;
+		// TODO make this function generic
+		printOutGrid(intValueGrid);
+		addFields();
 	}
 
-	private static <T > void printOutGrid(T[][] valueGrid) {
+	private void addFields() {
+		cemetery = new Cemetery(null, FieldType.CEMETERY);
+		grid = new Field[worldDimension[0]][worldDimension[1]];
+
+		for (int i = 0; i < intValueGrid.length; i++) {
+			for (int j = 0; j < intValueGrid[0].length; j++) {
+				grid[i][j] = new Field(new int[] { i, j }, FieldType.getType(intValueGrid[i][j]));
+			}
+		}
+
+	}
+
+	private static <T> void printOutGrid(int[][] intValueGrid2) {
 		System.out.print("\n###");
-		for (int i = 0; i < valueGrid[0].length; i++) {
+		for (int i = 0; i < intValueGrid2[0].length; i++) {
 			System.out.print("+-" + (i + 1) + "-");
 		}
 
-		for (int i = 0; i < valueGrid.length; i++) {
+		for (int i = 0; i < intValueGrid2.length; i++) {
 			System.out.print("\n" + (1 + i) + " #");
-			for (int j = 0; j < valueGrid[0].length; j++) {
-				System.out.printf("|%.1f", (1 + (double) valueGrid[i][j]));
+			for (int j = 0; j < intValueGrid2[0].length; j++) {
+				System.out.printf("|%.1f", (1 + (double) intValueGrid2[i][j]));
 			}
 			System.out.print("\n###");
-			Arrays.stream(valueGrid[0]).forEach(s -> System.out.print("+---"));
+			Arrays.stream(intValueGrid2[0]).forEach(s -> System.out.print("+---"));
 		}
 
 		System.out.println("");
@@ -51,7 +62,7 @@ public class WorldMapBuilder {
 	}
 
 	public WorldMapBuilder setWorldDimension(int[] worldDim) {
-		WorldMapBuilder.worldDimension = worldDim;
+		WorldMap.worldDimension=worldDim;
 		return this;
 	}
 
@@ -69,8 +80,7 @@ public class WorldMapBuilder {
 
 		doubleValueGrid = new double[worldDimension[0]][worldDimension[1]];
 		intValueGrid = new int[worldDimension[0]][worldDimension[1]];
-			
-		
+
 		for (int i = 0; i < numbOfDrops; i++) {
 			int randomPositionX = (int) (Math.random() * worldDimension[0]);
 			int randomPositionY = (int) (Math.random() * worldDimension[1]);
@@ -79,10 +89,10 @@ public class WorldMapBuilder {
 
 			dropFall(randomValue, randomPositionX, randomPositionY);
 		}
-		
+
 		for (int i = 0; i < doubleValueGrid.length; i++) {
 			for (int j = 0; j < doubleValueGrid[0].length; j++) {
-				intValueGrid[i][j] = (int)(doubleValueGrid[i][j]+0.5);
+				intValueGrid[i][j] = (int) (doubleValueGrid[i][j] + 0.5);
 			}
 		}
 
@@ -107,8 +117,8 @@ public class WorldMapBuilder {
 		for (int i = 0; i < doubleValueGrid.length; i++) {
 			if (i >= startX && i < endX) {
 				for (int j = 0; j < doubleValueGrid[0].length; j++) {
-					if (j >= startY && j < endY)  {
-						doubleValueGrid[i][j]+=randomValue;
+					if (j >= startY && j < endY) {
+						doubleValueGrid[i][j] += randomValue;
 					}
 				}
 			}

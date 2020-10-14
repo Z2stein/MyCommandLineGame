@@ -45,12 +45,12 @@ public class ChangeField {
 	protected static boolean checkIfNewCoordinatesValid(int[] coordinateDelta, GameCharacter currentMainCharakter) {
 		int[] coordinateOfChar = currentMainCharakter.getCharakterPosition();
 
-		int worldDim = WorldMap.getWorldDimension();
+		int[] worldDim = WorldMap.getWorldDimension();
 
 		int[] newCoord = {0,0};
 		for (int i = 0; i < coordinateOfChar.length; i++) {
 			newCoord[i] = coordinateDelta[i] + coordinateOfChar[i];
-			if (newCoord[i] < 0 || newCoord[i] >= worldDim) {
+			if (newCoord[i] < 0 || newCoord[i] >= worldDim[i]) {
 				return false;
 			}
 			;

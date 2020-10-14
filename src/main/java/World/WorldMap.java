@@ -1,62 +1,29 @@
 package World;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import Character.GameCharacter;
-import World.Fields.Cemetery;
 
 public class WorldMap {
 
-	static private Field[][] grid;
-	static private int worldDimension;
-	private static Cemetery cemetery;
+	static protected Field[][] grid;
+	static protected int[] worldDimension;
+	protected static Cemetery cemetery;
 
-	static public void createWorld(int size) {
-		worldDimension = size;
-		
-		createWorldGrid(size);
-		
-		
-	}
 
-	private static void createWorldGrid(int size) {
-		grid = new Field[size][size];
-		int chooseInt;
-		int x = 0;
-		int y = 0;
-
-		for (int i = 0; i < grid.length; i++) {
-
-			for (int j = 0; j < grid[0].length; j++) {
-				chooseInt = (int) (Math.random() * 4);
-				int[] coordinates = { x, y };
-				grid[i][j] = Field.createField(chooseInt, coordinates);
-				grid[i][j].setCoordinates(coordinates);
-				y++;
-			}
-			y = 0;
-			x++;
-		}	
-		
-		cemetery = new Cemetery();
-	}
 
 	public static Field getField(int[] targetCoordinates) {
 		return grid[targetCoordinates[0]][targetCoordinates[1]];
 	}
 
-	public static int getWorldDimension() {
+	public static int[] getWorldDimension() {
 		return worldDimension;
 	}
 
-	public static void setWorldDimension(int worldDimension) {
-		WorldMap.worldDimension = worldDimension;
-	}
 
-	public static void createAndSetRandChars(int n) {
-		for (int i = 0; i < n; i++) {
-			int[] randCoord = { (int) Math.random() * worldDimension, (int) Math.random() * worldDimension };
+	public static void createAndSetRandChars(int numberOfRandomChars) {
+		for (int i = 0; i < numberOfRandomChars; i++) {
+			int[] randCoord = { (int) Math.random() * worldDimension[0], (int) Math.random() * worldDimension[1] };
 			GameCharacter.createRandom("RandomChar" + i, randCoord);
 		}
 	}

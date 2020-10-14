@@ -6,6 +6,7 @@ import Character.Race.CharRace;
 import Support.EzLog;
 import Support.MsgType;
 import World.WorldMap;
+import World.WorldMapBuilder;
 
 public class Main {
 
@@ -15,8 +16,7 @@ public class Main {
 	private static GameCharacter character;
 
 	public static void main(String[] args) throws Exception {
-		WorldMap.createWorld(fieldSize);
-
+		(new WorldMapBuilder()).setDropRadius(1).setWorldDimension(5).setNumbOfDrops(2).build();
 		character = createPlayserCharacter();
 
 		while (true) {
